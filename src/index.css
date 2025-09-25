@@ -103,27 +103,28 @@
     transition: var(--transition-bounce);
   }
 
-  /* Estampa do imgur para todas as seções exceto hero */
-  section:not(#hero):before,
-  footer:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('https://i.imgur.com/gjBoffg.png');
-    background-size: 60px 60px;
-    background-repeat: repeat;
-    filter: invert(1);
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: -1;
-  }
+  /* Estampa do imgur apenas no mobile para todas as seções exceto hero */
+  @media (max-width: 768px) {
+    section:not(#hero):before,
+    footer:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('https://i.imgur.com/gjBoffg.png');
+      background-size: 60px 60px;
+      background-repeat: repeat;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-  section:not(#hero),
-  footer {
-    position: relative;
+    section:not(#hero),
+    footer {
+      position: relative;
+    }
   }
 
   .bounce-transition {
