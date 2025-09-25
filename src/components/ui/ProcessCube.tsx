@@ -1,5 +1,4 @@
 import { Canvas } from '@react-three/fiber';
-import { Text } from '@react-three/drei';
 import { Suspense } from 'react';
 
 interface ProcessCubeProps {
@@ -13,24 +12,33 @@ function Cube({ stepNumber }: ProcessCubeProps) {
         <boxGeometry args={[2, 2, 2]} />
         <meshStandardMaterial color="white" />
       </mesh>
-      <Text
-        position={[0, 0, 1.01]}
-        fontSize={0.8}
-        color="black"
-        anchorX="center"
-        anchorY="middle"
-        font="/fonts/Inter-Bold.woff"
+      {/* Número renderizado como HTML sobre o cubo */}
+      <div 
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          fontSize: '4rem',
+          fontWeight: 'bold',
+          color: 'black',
+          pointerEvents: 'none',
+          zIndex: 10
+        }}
       >
         {stepNumber}
-      </Text>
+      </div>
     </group>
   );
 }
 
 const ProcessCube = ({ stepNumber }: ProcessCubeProps) => {
   return (
-    <div className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80">
-      <Canvas camera={{ position: [3, 3, 3], fov: 50 }}>
+    <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80">
+      <Canvas 
+        camera={{ position: [3, 3, 3], fov: 50 }}
+        style={{ background: 'transparent' }}
+      >
         <Suspense fallback={null}>
           <ambientLight intensity={0.6} />
           <pointLight position={[10, 10, 10]} intensity={0.8} />
@@ -38,6 +46,13 @@ const ProcessCube = ({ stepNumber }: ProcessCubeProps) => {
           <Cube stepNumber={stepNumber} />
         </Suspense>
       </Canvas>
+      
+      {/* Fallback: número sobreposto caso o 3D não funcione */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <span className="text-4xl md:text-6xl lg:text-8xl font-bold text-white z-20">
+          {stepNumber}
+        </span>
+      </div>
     </div>
   );
 };
