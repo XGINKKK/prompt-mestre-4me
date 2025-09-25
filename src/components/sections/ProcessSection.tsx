@@ -97,14 +97,12 @@ const ProcessSection = () => {
   return (
     <section 
       ref={containerRef} 
-      className="relative h-[500vh] bg-gradient-to-br from-gray-900 via-gray-800 to-black"
+      className="process-section-fixed"
     >
-      {/* Container sticky que fixa a seção */}
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <div className="w-full relative">
-          
-          {/* Header fixo */}
-          <div className="absolute top-16 left-0 right-0 text-center z-20">
+      <div className="process-sticky-fixed">
+        {/* Header fixo */}
+        <div className="absolute top-0 left-0 w-full z-20 p-8">
+          <div className="text-center">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Nosso <span className="engineering-text-gradient">Processo</span>
             </h2>
@@ -112,93 +110,78 @@ const ProcessSection = () => {
               Da concepção à execução, um fluxo de trabalho preciso e transparente que garante excelência em cada etapa.
             </p>
           </div>
+        </div>
 
-          {/* Container dos cards com transição horizontal */}
-          <div className="relative h-screen flex items-center justify-center pt-32">
-            <div 
-              className="flex transition-transform duration-800 ease-out"
-              style={{ 
-                transform: `translateX(-${currentIndex * 100}%)`,
-                width: `${steps.length * 100}%`
-              }}
-            >
-              {steps.map((step, index) => (
-                <div
-                  key={step.number}
-                  className="w-full flex-shrink-0 px-12"
-                  style={{ width: `${100 / steps.length}%` }}
-                >
-                  <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                    
-                    {/* Lado esquerdo - Número */}
-                    <div className="flex justify-center lg:justify-end">
-                      <div className="process-badge-fixed text-8xl font-bold">
-                        {step.number}
-                      </div>
+        {/* Container dos cards */}
+        <div className="process-container-fixed">
+          {steps.map((step, index) => {
+            let cardClass = 'process-card-fixed';
+            
+            if (index === currentIndex) {
+              cardClass += ' active';
+            } else if (index < currentIndex) {
+              cardClass += ' exiting';
+            }
+            
+            return (
+              <div 
+                key={step.number}
+                className={cardClass}
+              >
+                {/* Header com número e divisor */}
+                <div className="process-header-fixed">
+                  <div className="process-number-fixed">
+                    <div className="process-badge-fixed">
+                      {step.number}
                     </div>
-                    
-                    {/* Lado direito - Conteúdo */}
-                    <div className="text-white space-y-8 lg:pl-12">
-                      <div className="text-blue-400 font-semibold text-xl tracking-wider">
-                        {step.number}.
-                      </div>
-                      
-                      <h3 className="text-4xl lg:text-5xl font-bold leading-tight process-title-fixed">
-                        {step.title}
-                      </h3>
-                      
-                      <p className="text-white/80 text-xl leading-relaxed max-w-xl">
-                        {step.description}
-                      </p>
-                      
-                      {/* Imagem */}
-                      <div className="process-image-fixed">
-                        <img 
-                          src={step.image} 
-                          alt={step.title}
-                          loading="lazy"
-                          className="rounded-xl shadow-2xl max-w-md"
-                        />
-                      </div>
-                    </div>
-                    
+                    <div className="process-divider-fixed" />
+                  </div>
+                  
+                  <h3 className="process-title-fixed">
+                    {step.title}
+                  </h3>
+                </div>
+
+                {/* Conteúdo */}
+                <div className="process-content-fixed">
+                  <div className="process-description-fixed">
+                    <p>{step.description}</p>
+                  </div>
+
+                  {/* Imagem */}
+                  <div className="process-image-fixed">
+                    <img 
+                      src={step.image} 
+                      alt={step.title}
+                      loading="lazy"
+                    />
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Navegação com setas */}
-          <button 
-            onClick={() => currentIndex > 0 && setCurrentIndex(prev => prev - 1)}
-            className="absolute left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all disabled:opacity-50"
-            disabled={currentIndex === 0}
-          >
-            ←
-          </button>
-          
-          <button 
-            onClick={() => currentIndex < steps.length - 1 && setCurrentIndex(prev => prev + 1)}
-            className="absolute right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-all disabled:opacity-50"
-            disabled={currentIndex === steps.length - 1}
-          >
-            →
-          </button>
-          
-          {/* Indicadores */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
-            {steps.map((_, index) => (
-              <button
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Indicador de progresso */}
+        <div className="process-progress-fixed">
+          {steps.map((_, index) => {
+            let stepClass = 'process-progress-step-fixed';
+            
+            if (index === currentIndex) {
+              stepClass += ' active';
+            } else if (index < currentIndex) {
+              stepClass += ' completed';
+            }
+            
+            return (
+              <div 
                 key={index}
+                className={stepClass}
                 onClick={() => handleProgressClick(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
-                  index === currentIndex ? 'bg-blue-500 w-8' : 'bg-white/30'
-                }`}
                 title={`Etapa ${index + 1}`}
               />
-            ))}
-          </div>
-          
+            );
+          })}
         </div>
       </div>
     </section>
