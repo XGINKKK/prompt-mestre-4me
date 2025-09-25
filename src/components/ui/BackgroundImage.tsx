@@ -5,7 +5,7 @@ const BackgroundImage = () => {
       className="pointer-events-none fixed inset-0"
       style={{
         zIndex: -1,
-        opacity: 0.15,
+        opacity: 0.05, // Mesma opacidade do desktop original
         background: '#000000', // Background preto sólido primeiro
         transform: 'translateZ(0)',
         willChange: 'opacity'
