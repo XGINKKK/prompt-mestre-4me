@@ -39,7 +39,7 @@ const StickyCTA = () => {
           <div className="engineering-card m-4 p-4">
             <div className="flex items-center justify-between mb-3">
               <div>
-                <div className="text-xs text-accent mb-1">Resposta em até 1h</div>
+                <div className="text-xs text-white mb-1">Resposta em até 1h</div>
                 <div className="text-sm text-white font-semibold">CREA + ART • Compatibilização</div>
               </div>
               <img 

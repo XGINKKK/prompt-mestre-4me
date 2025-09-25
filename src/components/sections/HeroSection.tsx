@@ -80,9 +80,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            Estrutural e fundações, hidrossanitário, elétrico, PPCI, laudos técnicos e assessoria 
+            Estrutural e fundações, hidrossanitário, elétrico, PPCI, laudos técnicos e assessoria
             prazos confiáveis e documentação completa.
           </motion.p>
 

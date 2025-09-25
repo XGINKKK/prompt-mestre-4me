@@ -32,7 +32,7 @@ const MetricsSection = () => {
               Resultados que{' '}
               <span className="engineering-text-gradient">Inspiram</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-white max-w-2xl mx-auto">
               Números que refletem nosso comprometimento com a excelência
             </p>
           </div>
@@ -50,7 +50,7 @@ const MetricsSection = () => {
                   />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">{metric.label}</h3>
-                <p className="text-muted-foreground">{metric.description}</p>
+                <p className="text-white">{metric.description}</p>
               </div>
             </ScrollReveal>
           ))}

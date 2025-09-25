@@ -93,7 +93,7 @@ export default {
       backgroundImage: {
         'gradient-engineering': 'linear-gradient(135deg, hsl(0 0% 0%), hsl(0 0% 10%))',
         'gradient-card': 'linear-gradient(135deg, hsl(0 0% 0% / 0.8), hsl(0 0% 5% / 0.9))',
-        'gradient-text': 'linear-gradient(90deg, hsl(0 0% 55%), hsl(0 0% 45%))',
+        'gradient-text': 'linear-gradient(90deg, hsl(0 0% 100%), hsl(0 0% 90%))',
       },
     },
   },

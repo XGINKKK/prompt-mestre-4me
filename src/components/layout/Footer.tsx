@@ -15,7 +15,7 @@ const Footer = () => {
                 alt="4ME Engenharia" 
                 className="h-10 w-auto"
               />
-              <p className="text-accent text-lg font-medium">
+              <p className="text-white text-lg font-medium">
                 O Arquétipo do Criador.
               </p>
             </div>
@@ -23,7 +23,7 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-4">
               <h4 className="text-white font-semibold text-lg">Localização</h4>
-              <div className="space-y-2 text-muted-foreground">
+              <div className="space-y-2 text-white">
                 <p>Rua Miguel Matte, N 687, Sala 1804</p>
                 <p>Bairro Pioneiros, Balneário Camboriú</p>
                 <p className="pt-2">Atendemos:</p>
@@ -34,7 +34,7 @@ const Footer = () => {
             {/* Contact Details */}
             <div className="space-y-4">
               <h4 className="text-white font-semibold text-lg">Contato</h4>
-              <div className="space-y-2 text-muted-foreground">
+              <div className="space-y-2 text-white">
                 <p>contato@4meengenharia.com</p>
                 <a 
                   href="https://www.instagram.com/4meengenharia"
@@ -52,7 +52,7 @@ const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="pt-8 border-t border-white/10 text-center text-muted-foreground">
+          <div className="pt-8 border-t border-white/10 text-center text-white">
             <p>© {currentYear} 4ME Engenharia. Todos os direitos reservados.</p>
           </div>
         </ScrollReveal>

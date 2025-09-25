@@ -13,7 +13,7 @@ const AboutSection = () => {
                 <h2 className="text-4xl md:text-5xl font-bold text-white">
                   Nossa <span className="engineering-text-gradient">Missão</span>
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg text-white leading-relaxed">
                   Revolucionar a engenharia por meio de soluções técnicas inovadoras, 
                   impulsionando a transição para práticas mais autênticas e precisas. 
                   Inspirar mudanças impactantes no setor da construção civil através de 
@@ -26,7 +26,7 @@ const AboutSection = () => {
                 <h3 className="text-3xl md:text-4xl font-bold text-white">
                   Nossa <span className="engineering-text-gradient">Visão</span>
                 </h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg text-white leading-relaxed">
                   Ser referência em projetos complementares, assessoria técnica e laudos 
                   especializados, nacional e regionalmente. Desafiar os limites da engenharia 
                   tradicional, alcançando um futuro onde a precisão técnica e a inovação se 

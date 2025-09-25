@@ -52,7 +52,7 @@ const ProcessSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Nosso <span className="engineering-text-gradient">Processo</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-white max-w-3xl mx-auto">
               Da ideia à execução, um fluxo de trabalho preciso e transparente.
             </p>
           </div>
@@ -77,7 +77,7 @@ const ProcessSection = () => {
                     {step.title}
                   </h3>
                   
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="text-lg text-white leading-relaxed">
                     {step.description}
                   </p>
                 </div>

@@ -11,8 +11,7 @@ const ServicesSection = () => {
         'Projeto Elétrico',
         'Projeto de PPCI',
         'Compatibilização de Projetos'
-      ],
-      icon: '🏗️'
+      ]
     },
     {
       title: 'Assessoria Técnica',
@@ -23,8 +22,7 @@ const ServicesSection = () => {
         'Análise de Viabilidade',
         'Gestão de Projetos',
         'Suporte Técnico Especializado'
-      ],
-      icon: '📋'
+      ]
     },
     {
       title: 'Laudos Técnicos',
@@ -35,8 +33,7 @@ const ServicesSection = () => {
         'Laudo de Estabilidade',
         'Análise Patológica',
         'Parecer Técnico'
-      ],
-      icon: '📊'
+      ]
     }
   ];
 
@@ -48,7 +45,7 @@ const ServicesSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Nossos <span className="engineering-text-gradient">Serviços</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-white max-w-3xl mx-auto">
               Oferecemos soluções completas em engenharia, do conceito à entrega.
             </p>
           </div>
@@ -58,16 +55,13 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <ScrollReveal key={service.title} delay={index * 0.2}>
               <div className="engineering-card p-8 h-full group hover:scale-105 transition-all duration-300">
-                {/* Icon */}
-                <div className="text-4xl mb-6 text-center">{service.icon}</div>
-                
                 {/* Title */}
                 <h3 className="text-2xl font-semibold text-white mb-4 text-center">
                   {service.title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-muted-foreground mb-6 text-center leading-relaxed">
+                <p className="text-white mb-6 text-center leading-relaxed">
                   {service.description}
                 </p>
                 

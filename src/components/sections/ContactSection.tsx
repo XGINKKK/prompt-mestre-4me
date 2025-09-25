@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 const ContactSection = () => {
   const contactInfo = [
     {
-      icon: '📍',
       title: 'Endereço',
       details: [
         'Rua Miguel Matte, N 687, Sala 1804',
@@ -12,12 +11,10 @@ const ContactSection = () => {
       ]
     },
     {
-      icon: '📞',
       title: 'Telefone',
       details: ['+55 (47) 99795-7480']
     },
     {
-      icon: '✉️',
       title: 'Email',
       details: ['contato@4meengenharia.com']
     }
@@ -31,7 +28,7 @@ const ContactSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Entre em <span className="engineering-text-gradient">Contato</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-white max-w-3xl mx-auto">
               Tem uma ideia ou um projeto em mente? Adoraríamos ouvir sobre ele.
             </p>
           </div>
@@ -43,11 +40,10 @@ const ContactSection = () => {
             <div className="space-y-8">
               {contactInfo.map((info, index) => (
                 <div key={info.title} className="engineering-card p-6 flex items-start space-x-4">
-                  <div className="text-3xl">{info.icon}</div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2">{info.title}</h3>
                     {info.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-muted-foreground">
+                      <p key={detailIndex} className="text-white">
                         {detail}
                       </p>
                     ))}
@@ -84,9 +80,8 @@ const ContactSection = () => {
           <ScrollReveal delay={0.2}>
             <div className="engineering-card p-8 h-full flex items-center justify-center">
               <div className="text-center">
-                <div className="text-8xl mb-6">🗺️</div>
                 <h3 className="text-2xl font-semibold text-white mb-4">Localização</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-white leading-relaxed">
                   Atendemos toda a região de Santa Catarina, incluindo Grande Florianópolis, 
                   Itajaí, Blumenau e Joinville. Nossa localização estratégica em Balneário 
                   Camboriú nos permite oferecer suporte rápido e eficiente.
