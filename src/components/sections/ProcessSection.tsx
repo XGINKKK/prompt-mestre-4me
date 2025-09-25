@@ -102,14 +102,14 @@ const ProcessSection = () => {
       className="relative h-[400vh] bg-black"
     >
       {/* Container sticky */}
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-8">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-4 md:py-8">
         
         {/* Header com espaçamento adequado */}
-        <div className="text-center mb-8 md:mb-16 px-4 md:px-8 pt-4 md:pt-8">
-          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
+        <div className="text-center mb-6 md:mb-12 px-4 md:px-8 pt-2 md:pt-4">
+          <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold text-white mb-3 md:mb-6">
             Nosso <span className="engineering-text-gradient">Processo</span>
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-lg lg:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed">
             Da concepção à execução, um fluxo de trabalho preciso e transparente que garante excelência em cada etapa.
           </p>
         </div>
@@ -125,52 +125,73 @@ const ProcessSection = () => {
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className="w-full flex-shrink-0 px-4 md:px-8 lg:px-16"
+                className="w-full flex-shrink-0 px-3 md:px-8 lg:px-16"
                 style={{ minWidth: '100%' }}
               >
                 <div className="max-w-6xl mx-auto">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
+                  <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
                     
-                    {/* Lado esquerdo - Cubo 3D branco melhorado */}
+                    {/* Cubo 3D com dimensões reais */}
                     <div className="flex justify-center lg:justify-end order-2 lg:order-1">
-                      <div className="relative group">
-                        {/* Cubo 3D branco com sombras */}
-                        <div className="w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-white rounded-3xl flex items-center justify-center relative overflow-hidden transition-all duration-500 hover:scale-105">
+                      <div className="relative" style={{ perspective: '1000px' }}>
+                        {/* Container do cubo 3D */}
+                        <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80" style={{ transformStyle: 'preserve-3d' }}>
                           
-                          {/* Sombras para efeito 3D */}
-                          <div className="absolute -bottom-6 -right-6 w-full h-full bg-black/20 rounded-3xl blur-xl"></div>
-                          <div className="absolute -bottom-3 -right-3 w-full h-full bg-black/10 rounded-3xl"></div>
-                          
-                          {/* Gradiente sutil no cubo */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl"></div>
-                          
-                          {/* Reflexo superior */}
-                          <div className="absolute top-6 left-6 w-16 h-16 bg-white/80 rounded-2xl shadow-inner"></div>
-                          
-                          {/* Número central com fonte menos bold */}
-                          <div className="relative z-10 text-center">
-                            <span className="text-7xl md:text-8xl lg:text-9xl font-semibold text-gray-800 leading-none">
+                          {/* Face frontal */}
+                          <div 
+                            className="absolute inset-0 bg-white rounded-2xl shadow-2xl flex items-center justify-center border border-gray-200"
+                            style={{ 
+                              transform: 'translateZ(40px) rotateY(-10deg) rotateX(5deg)',
+                              transformStyle: 'preserve-3d'
+                            }}
+                          >
+                            {/* Número */}
+                            <span className="text-4xl md:text-6xl lg:text-8xl font-semibold text-gray-800 leading-none">
                               {step.number}
                             </span>
+                            
+                            {/* Reflexo superior */}
+                            <div className="absolute top-4 left-4 w-8 h-8 md:w-12 md:h-12 bg-white/60 rounded-lg shadow-inner"></div>
                           </div>
                           
-                          {/* Sombra interna sutil */}
-                          <div className="absolute inset-0 rounded-3xl shadow-inner bg-gradient-to-br from-transparent via-transparent to-black/5"></div>
+                          {/* Face lateral direita */}
+                          <div 
+                            className="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-500 rounded-2xl shadow-xl"
+                            style={{ 
+                              transform: 'rotateY(90deg) translateZ(40px) translateX(40px) rotateY(-10deg) rotateX(5deg)',
+                              transformOrigin: 'right center'
+                            }}
+                          ></div>
+                          
+                          {/* Face superior */}
+                          <div 
+                            className="absolute inset-0 bg-gradient-to-b from-gray-200 to-gray-400 rounded-2xl shadow-lg"
+                            style={{ 
+                              transform: 'rotateX(90deg) translateZ(40px) translateY(-40px) rotateY(-10deg) rotateX(5deg)',
+                              transformOrigin: 'top center'
+                            }}
+                          ></div>
+                          
+                          {/* Sombra no chão */}
+                          <div 
+                            className="absolute -bottom-8 left-4 right-4 h-8 bg-black/20 rounded-full blur-xl"
+                            style={{ transform: 'rotateX(90deg) translateZ(-20px)' }}
+                          ></div>
                         </div>
                       </div>
                     </div>
                     
-                    {/* Lado direito - Conteúdo limpo */}
-                    <div className="text-white space-y-4 md:space-y-6 lg:pl-12 order-1 lg:order-2 text-center lg:text-left">
-                      <div className="text-white/60 font-semibold text-base md:text-lg tracking-wider uppercase">
+                    {/* Conteúdo */}
+                    <div className="text-white space-y-3 md:space-y-6 lg:pl-12 order-1 lg:order-2 text-center lg:text-left">
+                      <div className="text-white/60 font-semibold text-xs md:text-base lg:text-lg tracking-wider uppercase">
                         Etapa {step.number}
                       </div>
                       
-                      <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-white">
+                      <h3 className="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-bold leading-tight text-white">
                         {step.title}
                       </h3>
                       
-                      <p className="text-white/80 text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                      <p className="text-white/80 text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0">
                         {step.description}
                       </p>
                     </div>
@@ -183,15 +204,15 @@ const ProcessSection = () => {
         </div>
         
         {/* Indicadores de progresso */}
-        <div className="flex justify-center mt-8 md:mt-12 pb-4 md:pb-8">
-          <div className="flex space-x-3 md:space-x-4 bg-black/40 backdrop-blur-sm px-6 md:px-8 py-3 md:py-4 rounded-full border border-white/10">
+        <div className="flex justify-center mt-4 md:mt-8 pb-2 md:pb-4">
+          <div className="flex space-x-2 md:space-x-4 bg-black/40 backdrop-blur-sm px-4 md:px-8 py-2 md:py-4 rounded-full border border-white/10">
             {steps.map((_, index) => (
               <button
                 key={index}
                 onClick={() => handleProgressClick(index)}
-                className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 md:w-4 md:h-4 rounded-full transition-all duration-300 ${
                   index === currentIndex 
-                    ? 'bg-white w-8 md:w-10 shadow-lg' 
+                    ? 'bg-white w-6 md:w-10 shadow-lg' 
                     : 'bg-white/30 hover:bg-white/50'
                 }`}
                 title={`Etapa ${index + 1}`}
