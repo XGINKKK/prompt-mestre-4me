@@ -6,6 +6,40 @@ const ProcessSection = () => {
   const containerRef = useRef(null);
   const [currentStep, setCurrentStep] = useState(0);
   
+  // Define steps first before using in useEffect
+  const steps = [
+    {
+      number: '01',
+      title: 'Briefing e levantamento',
+      description: 'Requisitos, visitas e viabilidade técnica.',
+      image: 'https://i.imgur.com/WBPCAx2.png'
+    },
+    {
+      number: '02',
+      title: 'Projeto estrutural e fundações',
+      description: 'Dimensionamento e detalhamento NBR 6118/6122.',
+      image: 'https://i.imgur.com/jvb23r8.png'
+    },
+    {
+      number: '03',
+      title: 'Hidrossanitário e elétrico',
+      description: 'Compatibilização NBR 5626/5410 com executivos claros.',
+      image: 'https://i.imgur.com/E3maufk.png'
+    },
+    {
+      number: '04',
+      title: 'PPCI e aprovações',
+      description: 'Saídas, hidrantes, sinalização e aprovação no CBMSC.',
+      image: 'https://i.imgur.com/QoVjmMI.png'
+    },
+    {
+      number: '05',
+      title: 'Laudos e assessoria',
+      description: 'Inspeções, ART e suporte em obra até a entrega.',
+      image: 'https://i.imgur.com/lWaT7vf.png'
+    }
+  ];
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -68,39 +102,6 @@ const ProcessSection = () => {
       window.removeEventListener('scroll', handlePageScroll);
     };
   }, [currentStep, steps.length]);
-
-  const steps = [
-    {
-      number: '01',
-      title: 'Briefing e levantamento',
-      description: 'Requisitos, visitas e viabilidade técnica.',
-      image: 'https://i.imgur.com/WBPCAx2.png'
-    },
-    {
-      number: '02',
-      title: 'Projeto estrutural e fundações',
-      description: 'Dimensionamento e detalhamento NBR 6118/6122.',
-      image: 'https://i.imgur.com/jvb23r8.png'
-    },
-    {
-      number: '03',
-      title: 'Hidrossanitário e elétrico',
-      description: 'Compatibilização NBR 5626/5410 com executivos claros.',
-      image: 'https://i.imgur.com/E3maufk.png'
-    },
-    {
-      number: '04',
-      title: 'PPCI e aprovações',
-      description: 'Saídas, hidrantes, sinalização e aprovação no CBMSC.',
-      image: 'https://i.imgur.com/QoVjmMI.png'
-    },
-    {
-      number: '05',
-      title: 'Laudos e assessoria',
-      description: 'Inspeções, ART e suporte em obra até a entrega.',
-      image: 'https://i.imgur.com/lWaT7vf.png'
-    }
-  ];
 
   // Calcular opacidade baseado no estado atual
   const getStepOpacity = (index) => {
