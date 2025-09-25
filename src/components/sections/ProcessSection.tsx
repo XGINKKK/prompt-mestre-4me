@@ -133,7 +133,7 @@ const ProcessSection = () => {
                   <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
                     
                     {/* Cubo 3D moderno */}
-                    <div className="flex justify-center lg:justify-end order-2 lg:order-1">
+                    <div className="flex justify-center lg:justify-end order-2 lg:order-1 items-center min-h-[120px] lg:min-h-0">
                       <div className="relative flex items-center justify-center">
                         <ProcessCube stepNumber={step.number} />
                       </div>
