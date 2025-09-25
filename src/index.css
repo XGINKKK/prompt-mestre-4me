@@ -119,80 +119,80 @@
     @apply bg-white/30;
   }
 
-  /* Process Section - FAKE HORIZONTAL SCROLL (Vertical scroll moves horizontal) */
-  .process-section-fake-scroll {
+  /* Process Section - DYNASTYAI SEQUENTIAL CARDS */
+  .process-section-sequential {
     position: relative;
     width: 100%;
-    height: 300vh; /* 3x a altura da viewport para criar espaço de scroll */
+    height: 500vh; /* 5x a altura para dar tempo para cada card aparecer */
     overflow: hidden;
     padding: 0;
   }
 
-  .process-sticky-container {
+  .process-sticky-sequential {
     position: sticky;
     top: 0;
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     overflow: hidden;
   }
 
-  .process-horizontal-track {
-    display: flex;
-    gap: 2rem;
-    padding: 2rem 0;
-    width: max-content;
-    min-width: 100%;
-    align-items: center;
+  .process-card-container {
+    position: relative;
+    width: 100%;
     height: 100%;
-    flex-wrap: nowrap;
-    /* Fade effect on edges */
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
-    );
-    /* Transform será controlado via JavaScript */
-    transform: translateX(0);
-    transition: transform 0.1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Cards - Fake scroll optimized */
-  .process-card-fake-scroll {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    min-width: 400px;
-    max-width: 400px;
-    height: 500px;
-    min-height: 500px;
-    max-height: 500px;
-    flex-shrink: 0;
+  /* Cards - DynastyAI Style Sequential */
+  .process-card-sequential {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-width: 90vw;
+    height: 600px;
+    max-height: 80vh;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: pointer;
+    border-radius: 2rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
-    margin: 0 1rem;
+    /* Estados iniciais */
+    opacity: 0;
+    scale: 0.8;
+    filter: blur(10px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  .process-card-fake-scroll::before {
+  /* Estado ativo do card */
+  .process-card-sequential.active {
+    opacity: 1;
+    scale: 1;
+    filter: blur(0px);
+    z-index: 10;
+  }
+
+  /* Estado saindo do card */
+  .process-card-sequential.exiting {
+    opacity: 0;
+    scale: 1.1;
+    filter: blur(5px);
+    z-index: 5;
+  }
+
+  .process-card-sequential::before {
     content: '';
     position: absolute;
     top: 0;
@@ -207,65 +207,35 @@
     );
   }
 
-  .process-card-fake-scroll:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 
-      0 20px 40px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.7);
-  }
-
-  .process-card-fake-scroll:hover::before {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.8),
-      transparent
-    );
-  }
-
-  /* Card content */
-  .process-content-fake-scroll {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-  }
-
-  .process-header-fake-scroll {
+  /* Header do card */
+  .process-header-sequential {
     flex-shrink: 0;
-    margin-bottom: 1.5rem;
-    overflow: hidden;
+    margin-bottom: 2rem;
   }
 
-  .process-number-fake-scroll {
+  .process-number-sequential {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
-  .process-badge-fake-scroll {
-    width: 3rem;
-    height: 3rem;
+  .process-badge-sequential {
+    width: 4rem;
+    height: 4rem;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: white;
     backdrop-filter: blur(10px);
   }
 
-  .process-divider-fake-scroll {
+  .process-divider-sequential {
     flex: 1;
     height: 1px;
     background: linear-gradient(
@@ -275,48 +245,43 @@
     );
   }
 
-  .process-title-fake-scroll {
-    font-size: 1.5rem;
+  .process-title-sequential {
+    font-size: 2.5rem;
     font-weight: 700;
     color: white;
-    line-height: 1.3;
-    margin-bottom: 1rem;
-    overflow: hidden;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
   }
 
-  .process-description-fake-scroll {
-    flex: 1;
-    font-size: 1rem;
+  .process-description-sequential {
+    font-size: 1.25rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    max-width: 80%;
   }
 
-  .process-image-fake-scroll {
+  .process-image-sequential {
     flex-shrink: 0;
-    height: 180px;
-    margin-top: 1.5rem;
-    border-radius: 0.75rem;
+    height: 250px;
+    border-radius: 1rem;
     overflow: hidden;
     position: relative;
+    margin-top: 2rem;
   }
 
-  .process-image-fake-scroll img {
+  .process-image-sequential img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.6s ease;
   }
 
-  .process-card-fake-scroll:hover .process-image-fake-scroll img {
+  .process-card-sequential.active .process-image-sequential img {
     transform: scale(1.05);
   }
 
   /* Gradient overlay */
-  .process-image-fake-scroll::after {
+  .process-image-sequential::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -332,100 +297,84 @@
   }
 
   /* Progress indicator */
-  .process-progress-indicator {
+  .process-progress-sequential {
     position: fixed;
-    bottom: 2rem;
+    bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     z-index: 100;
   }
 
-  .process-progress-dot {
-    width: 0.5rem;
-    height: 0.5rem;
+  .process-progress-step {
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+    cursor: pointer;
   }
 
-  .process-progress-dot.active {
+  .process-progress-step.active {
     background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 1);
     transform: scale(1.2);
+  }
+
+  .process-progress-step.completed {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.8);
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .process-card-fake-scroll {
-      width: 320px;
-      min-width: 320px;
-      max-width: 320px;
-      height: 420px;
-      min-height: 420px;
-      max-height: 420px;
-      padding: 1.5rem;
+    .process-card-sequential {
+      width: 90vw;
+      height: 500px;
+      padding: 2rem;
     }
 
-    .process-horizontal-track {
-      gap: 1.5rem;
-      padding: 1rem 0;
+    .process-title-sequential {
+      font-size: 2rem;
     }
 
-    .process-image-fake-scroll {
-      height: 140px;
+    .process-description-sequential {
+      font-size: 1.1rem;
+      max-width: 90%;
     }
 
-    .process-title-fake-scroll {
+    .process-image-sequential {
+      height: 200px;
+    }
+
+    .process-badge-sequential {
+      width: 3rem;
+      height: 3rem;
       font-size: 1.25rem;
     }
   }
 
   @media (max-width: 480px) {
-    .process-card-fake-scroll {
-      width: 280px;
-      min-width: 280px;
-      max-width: 280px;
-      height: 380px;
-      min-height: 380px;
-      max-height: 380px;
-      padding: 1.25rem;
+    .process-card-sequential {
+      width: 95vw;
+      height: 450px;
+      padding: 1.5rem;
     }
 
-    .process-image-fake-scroll {
-      height: 120px;
+    .process-title-sequential {
+      font-size: 1.75rem;
     }
 
-    .process-title-fake-scroll {
-      font-size: 1.125rem;
+    .process-description-sequential {
+      font-size: 1rem;
     }
 
-    .process-description-fake-scroll {
-      font-size: 0.9rem;
+    .process-image-sequential {
+      height: 150px;
     }
   }
-
-  /* Animations */
-  @keyframes slideInFakeScroll {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .process-card-fake-scroll {
-    animation: slideInFakeScroll 0.8s ease-out;
-  }
-
-  .process-card-fake-scroll:nth-child(1) { animation-delay: 0.1s; }
-  .process-card-fake-scroll:nth-child(2) { animation-delay: 0.2s; }
-  .process-card-fake-scroll:nth-child(3) { animation-delay: 0.3s; }
-  .process-card-fake-scroll:nth-child(4) { animation-delay: 0.4s; }
-  .process-card-fake-scroll:nth-child(5) { animation-delay: 0.5s; }
 }
 
 @layer base {

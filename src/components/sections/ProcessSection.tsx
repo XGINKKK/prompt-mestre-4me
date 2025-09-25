@@ -2,50 +2,47 @@ import { useRef, useEffect, useState } from 'react';
 
 const ProcessSection = () => {
   const containerRef = useRef(null);
-  const trackRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const steps = [
     {
       number: '01',
       title: 'Briefing e levantamento',
-      description: 'Requisitos detalhados, visitas técnicas e análise de viabilidade estrutural para garantir a execução perfeita.',
+      description: 'Requisitos detalhados, visitas técnicas e análise de viabilidade estrutural para garantir a execução perfeita do projeto.',
       image: 'https://i.imgur.com/WBPCAx2.png'
     },
     {
       number: '02',
       title: 'Projeto estrutural e fundações',
-      description: 'Dimensionamento preciso e detalhamento técnico seguindo rigorosamente as normas NBR 6118/6122.',
+      description: 'Dimensionamento preciso e detalhamento técnico seguindo rigorosamente as normas NBR 6118/6122 com cálculos estruturais avançados.',
       image: 'https://i.imgur.com/jvb23r8.png'
     },
     {
       number: '03',
       title: 'Hidrossanitário e elétrico',
-      description: 'Compatibilização completa das instalações NBR 5626/5410 com projetos executivos claros e detalhados.',
+      description: 'Compatibilização completa das instalações NBR 5626/5410 com projetos executivos claros, detalhados e prontos para execução.',
       image: 'https://i.imgur.com/E3maufk.png'
     },
     {
       number: '04',
       title: 'PPCI e aprovações',
-      description: 'Saídas de emergência, hidrantes, sinalização e aprovação completa junto ao Corpo de Bombeiros.',
+      description: 'Saídas de emergência, hidrantes, sinalização e aprovação completa junto ao Corpo de Bombeiros Militar de Santa Catarina.',
       image: 'https://i.imgur.com/QoVjmMI.png'
     },
     {
       number: '05',
       title: 'Laudos e assessoria',
-      description: 'Inspeções técnicas, ART e suporte completo em obra até a entrega final do projeto.',
+      description: 'Inspeções técnicas, ART e suporte completo em obra até a entrega final do projeto com acompanhamento técnico especializado.',
       image: 'https://i.imgur.com/lWaT7vf.png'
     }
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!containerRef.current || !trackRef.current) return;
+      if (!containerRef.current) return;
 
       const container = containerRef.current;
-      const track = trackRef.current;
-      
-      // Pega a posição do scroll da seção
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
@@ -54,34 +51,65 @@ const ProcessSection = () => {
         (windowHeight - rect.top) / (windowHeight + rect.height)
       ));
       
-      // Calcula quanto mover horizontalmente
-      const maxScroll = track.scrollWidth - window.innerWidth;
-      const translateX = scrollProgress * maxScroll;
+      // Calcula qual card deve estar ativo
+      const totalSteps = steps.length;
+      const stepProgress = scrollProgress * totalSteps;
+      const newIndex = Math.floor(stepProgress);
+      const clampedIndex = Math.min(newIndex, totalSteps - 1);
       
-      // Aplica a transformação
-      track.style.transform = `translateX(-${translateX}px)`;
-      
-      // Atualiza o indicador de progresso
-      const cardIndex = Math.floor(scrollProgress * (steps.length - 1));
-      setCurrentIndex(cardIndex);
+      if (clampedIndex !== currentIndex && !isTransitioning) {
+        setIsTransitioning(true);
+        setCurrentIndex(clampedIndex);
+        
+        // Remove a flag de transição após a animação
+        setTimeout(() => {
+          setIsTransitioning(false);
+        }, 800);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Chama uma vez para definir a posição inicial
+    handleScroll(); // Chama uma vez para definir o estado inicial
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [steps.length]);
+  }, [currentIndex, isTransitioning, steps.length]);
+
+  const handleProgressClick = (index) => {
+    if (index === currentIndex || isTransitioning) return;
+    
+    setIsTransitioning(true);
+    setCurrentIndex(index);
+    
+    // Scroll para a posição correspondente
+    const container = containerRef.current;
+    if (container) {
+      const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const sectionHeight = container.offsetHeight;
+      const targetProgress = index / (steps.length - 1);
+      const targetScroll = rect.top + (targetProgress * sectionHeight) - windowHeight;
+      
+      window.scrollTo({
+        top: window.scrollY + targetScroll,
+        behavior: 'smooth'
+      });
+    }
+    
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 800);
+  };
 
   return (
     <section 
       ref={containerRef} 
-      className="process-section-fake-scroll"
+      className="process-section-sequential"
     >
-      <div className="process-sticky-container">
+      <div className="process-sticky-sequential">
         {/* Header fixo */}
-        <div className="absolute top-0 left-0 w-full z-10 p-8">
+        <div className="absolute top-0 left-0 w-full z-20 p-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Nosso <span className="engineering-text-gradient">Processo</span>
@@ -92,57 +120,75 @@ const ProcessSection = () => {
           </div>
         </div>
 
-        {/* Track horizontal que se move */}
-        <div 
-          ref={trackRef}
-          className="process-horizontal-track"
-        >
-          {steps.map((step, index) => (
-            <div 
-              key={step.number}
-              className="process-card-fake-scroll"
-            >
-              {/* Header com número e divisor */}
-              <div className="process-header-fake-scroll">
-                <div className="process-number-fake-scroll">
-                  <div className="process-badge-fake-scroll">
-                    {step.number}
+        {/* Container dos cards */}
+        <div className="process-card-container">
+          {steps.map((step, index) => {
+            let cardClass = 'process-card-sequential';
+            
+            if (index === currentIndex) {
+              cardClass += ' active';
+            } else if (index < currentIndex) {
+              cardClass += ' exiting';
+            }
+            
+            return (
+              <div 
+                key={step.number}
+                className={cardClass}
+              >
+                {/* Header com número e divisor */}
+                <div className="process-header-sequential">
+                  <div className="process-number-sequential">
+                    <div className="process-badge-sequential">
+                      {step.number}
+                    </div>
+                    <div className="process-divider-sequential" />
                   </div>
-                  <div className="process-divider-fake-scroll" />
-                </div>
-                
-                <h3 className="process-title-fake-scroll">
-                  {step.title}
-                </h3>
-              </div>
-
-              {/* Conteúdo */}
-              <div className="process-content-fake-scroll">
-                <div className="process-description-fake-scroll">
-                  <p>{step.description}</p>
+                  
+                  <h3 className="process-title-sequential">
+                    {step.title}
+                  </h3>
                 </div>
 
-                {/* Imagem */}
-                <div className="process-image-fake-scroll">
-                  <img 
-                    src={step.image} 
-                    alt={step.title}
-                    loading="lazy"
-                  />
+                {/* Conteúdo */}
+                <div className="process-content-sequential">
+                  <div className="process-description-sequential">
+                    <p>{step.description}</p>
+                  </div>
+
+                  {/* Imagem */}
+                  <div className="process-image-sequential">
+                    <img 
+                      src={step.image} 
+                      alt={step.title}
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Indicador de progresso */}
-        <div className="process-progress-indicator">
-          {steps.map((_, index) => (
-            <div 
-              key={index}
-              className={`process-progress-dot ${index === currentIndex ? 'active' : ''}`}
-            />
-          ))}
+        <div className="process-progress-sequential">
+          {steps.map((_, index) => {
+            let stepClass = 'process-progress-step';
+            
+            if (index === currentIndex) {
+              stepClass += ' active';
+            } else if (index < currentIndex) {
+              stepClass += ' completed';
+            }
+            
+            return (
+              <div 
+                key={index}
+                className={stepClass}
+                onClick={() => handleProgressClick(index)}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
