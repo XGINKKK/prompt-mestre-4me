@@ -119,25 +119,39 @@
     @apply bg-white/30;
   }
 
-  /* Process Section Horizontal Scroll - VERSÃO CORRIGIDA */
+  /* Process Section - BLOQUEIO TOTAL DE SCROLL VERTICAL */
+  .process-section-wrapper {
+    position: relative;
+    overflow: hidden !important;
+    max-height: 100vh;
+    height: auto;
+  }
+
   .process-horizontal-container {
-    overflow-x: auto;
+    overflow-x: auto !important;
     overflow-y: hidden !important;
     scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
     padding-bottom: 1rem;
-    max-height: 100vh;
     height: auto;
-    /* Força apenas scroll horizontal */
-    overscroll-behavior-y: none;
+    max-height: calc(100vh - 200px);
+    /* Bloqueio total do scroll vertical */
+    overscroll-behavior-y: none !important;
+    overscroll-behavior-x: auto;
     -webkit-overflow-scrolling: auto;
+    /* Previne que o scroll vertical funcione */
+    touch-action: pan-x;
+  }
+
+  /* Remove scrollbar vertical completamente */
+  .process-horizontal-container::-webkit-scrollbar:vertical {
+    display: none !important;
   }
 
   .process-horizontal-container::-webkit-scrollbar {
-    height: 8px;
-    width: 0; /* Remove scrollbar vertical */
+    height: 8px !important;
+    width: 0 !important;
   }
 
   .process-horizontal-container::-webkit-scrollbar-track {
@@ -154,73 +168,115 @@
   }
 
   .process-horizontal-scroll {
-    display: flex;
+    display: flex !important;
     gap: 2rem;
     min-width: max-content;
     padding: 0 1rem;
-    height: 100%;
-    /* Previne que os filhos causem scroll vertical */
     align-items: stretch;
+    height: 100%;
+    flex-wrap: nowrap !important;
   }
 
+  /* Cards uniformizados */
   .process-step-card {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 1.5rem;
-    min-width: 400px;
-    max-width: 500px;
-    flex-shrink: 0;
-    padding: 1.5rem;
+    width: 450px !important;
+    min-width: 450px !important;
+    max-width: 450px !important;
+    height: 600px !important;
+    min-height: 600px !important;
+    max-height: 600px !important;
+    flex-shrink: 0 !important;
+    padding: 2rem;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
-    height: fit-content;
-    max-height: 80vh;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .process-step-card:hover {
     transform: translateY(-5px);
     border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
   }
 
   .process-step-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     overflow: hidden;
+    height: 100%;
+  }
+
+  .process-step-number {
+    flex-shrink: 0;
+    margin-bottom: 1rem;
+  }
+
+  .process-step-title {
+    flex-shrink: 0;
+    margin-bottom: 1rem;
+    height: auto;
+  }
+
+  .process-step-description {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .process-step-image {
     flex-shrink: 0;
+    height: 250px;
     overflow: hidden;
   }
 
-  /* Força o container pai a não permitir scroll vertical */
-  .process-section-wrapper {
-    overflow-y: hidden !important;
-    max-height: 100vh;
+  .process-step-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .process-step-card {
-      min-width: 320px;
-      max-width: 350px;
-      padding: 1rem;
-      max-height: 70vh;
+      width: 350px !important;
+      min-width: 350px !important;
+      max-width: 350px !important;
+      height: 550px !important;
+      min-height: 550px !important;
+      max-height: 550px !important;
+      padding: 1.5rem;
     }
     
     .process-horizontal-scroll {
       gap: 1.5rem;
       padding: 0 0.5rem;
     }
+
+    .process-step-image {
+      height: 200px;
+    }
   }
 
   @media (max-width: 480px) {
     .process-step-card {
-      min-width: 280px;
-      max-width: 300px;
-      max-height: 60vh;
+      width: 300px !important;
+      min-width: 300px !important;
+      max-width: 300px !important;
+      height: 500px !important;
+      min-height: 500px !important;
+      max-height: 500px !important;
+      padding: 1rem;
+    }
+
+    .process-step-image {
+      height: 180px;
     }
   }
 }
