@@ -1,24 +1,24 @@
 const BackgroundImage = () => {
   return (
     <>
-      {/* Estampa que aparece em todo lugar EXCETO na hero section */}
-      <div className="pointer-events-none fixed inset-0 z-[-1] opacity-[0.15]">
-        <img
-          src="https://i.imgur.com/gjBoffg.png"
-          alt=""
-          className="w-full h-full object-cover invert"
+      {/* Estampa de fundo visível em todas as seções exceto hero */}
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-20">
+        <div 
+          className="w-full h-full invert"
           style={{
+            backgroundImage: 'url(https://i.imgur.com/gjBoffg.png)',
             backgroundRepeat: 'repeat',
-            backgroundSize: 'auto',
+            backgroundSize: '400px 400px', // Tamanho definido para melhor visibilidade
+            backgroundPosition: 'center',
           }}
         />
       </div>
       
-      {/* Overlay que esconde a estampa apenas na hero section */}
+      {/* Overlay que esconde a estampa APENAS na primeira seção (hero) */}
       <div 
-        className="pointer-events-none fixed inset-0 z-[-1]"
+        className="pointer-events-none fixed top-0 left-0 right-0 z-0 bg-black"
         style={{
-          background: 'linear-gradient(to bottom, black 0%, black 100vh, transparent 100vh)',
+          height: '100vh', // Cobre apenas a altura da viewport (hero section)
         }}
       />
     </>

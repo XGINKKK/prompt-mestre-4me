@@ -71,7 +71,7 @@
 
   /* Engineering theme utilities */
   .engineering-card {
-    @apply bg-black/80 backdrop-blur-xl border border-white/10 rounded-xl;
+    @apply bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl;
     box-shadow: var(--shadow-card);
   }
 
