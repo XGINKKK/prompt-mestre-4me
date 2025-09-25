@@ -62,149 +62,186 @@ const ProcessSection = () => {
   useEffect(() => {
     const scrollElement = scrollRef.current;
     if (scrollElement) {
+      // Adicionar listener para scroll normal
       scrollElement.addEventListener('scroll', handleScroll);
-      return () => scrollElement.removeEventListener('scroll', handleScroll);
+      
+      // Interceptar scroll do mouse para converter vertical em horizontal
+      const handleWheelScroll = (e: WheelEvent) => {
+        e.preventDefault();
+        const scrollAmount = e.deltaY;
+        scrollElement.scrollLeft += scrollAmount;
+      };
+      
+      scrollElement.addEventListener('wheel', handleWheelScroll, { passive: false });
+      
+      return () => {
+        scrollElement.removeEventListener('scroll', handleScroll);
+        scrollElement.removeEventListener('wheel', handleWheelScroll);
+      };
     }
   }, []);
 
   return (
-    <section className="relative z-10 py-20 bg-background overflow-hidden">
-      <div className="container mx-auto px-4 mb-16">
-        <ScrollReveal>
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Nosso <span className="engineering-text-gradient">Processo</span>
-            </h2>
-            <p className="text-xl text-white max-w-3xl mx-auto">
-              Da ideia à execução, um fluxo de trabalho preciso e transparente.
-            </p>
-          </div>
-        </ScrollReveal>
+    <section className="processos-section relative z-10 bg-background overflow-hidden" style={{ height: '100vh' }}>
+      {/* Header */}
+      <div className="absolute top-0 left-0 right-0 z-20 pt-12 pb-8">
+        <div className="container mx-auto px-4">
+          <ScrollReveal>
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Nosso <span className="engineering-text-gradient">Processo</span>
+              </h2>
+              <p className="text-xl text-white max-w-3xl mx-auto">
+                Da ideia à execução, um fluxo de trabalho preciso e transparente.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
 
-      {/* Scroll Container */}
+      {/* Horizontal Scroll Container */}
       <div 
         ref={scrollRef}
-        className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        className="processos-scroll-container"
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          overflowX: 'scroll',
+          overflowY: 'hidden',
+          scrollSnapType: 'x mandatory',
+          height: '100vh',
+          width: '100%',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}
       >
         {steps.map((step, index) => (
           <div 
             key={step.number}
-            className="flex-none w-full snap-start"
+            className="processo-card"
+            style={{
+              flex: 'none',
+              width: '100vw',
+              height: '100vh',
+              display: 'flex',
+              scrollSnapAlign: 'start',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '0 2rem'
+            }}
           >
-            <div className="min-h-[80vh] flex items-center justify-center px-8 lg:px-16">
-              <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                
-                {/* Visual Element */}
-                <motion.div 
-                  className="order-2 lg:order-1 flex justify-center items-center"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="relative">
-                    {/* 3D Visual Element */}
-                    <div className="w-80 h-80 relative">
-                      {/* Gradient Background */}
-                      <div 
-                        className="absolute inset-0 rounded-3xl opacity-20"
-                        style={{
-                          background: `linear-gradient(135deg, 
-                            hsl(${index * 60}, 70%, 60%), 
-                            hsl(${(index * 60) + 30}, 80%, 70%)
-                          )`
-                        }}
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center h-full">
+              
+              {/* Visual Element */}
+              <motion.div 
+                className="flex justify-center items-center"
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative">
+                  {/* 3D Visual Element */}
+                  <div className="w-80 h-80 relative">
+                    {/* Gradient Background */}
+                    <div 
+                      className="absolute inset-0 rounded-3xl opacity-20"
+                      style={{
+                        background: `linear-gradient(135deg, 
+                          hsl(${index * 60}, 70%, 60%), 
+                          hsl(${(index * 60) + 30}, 80%, 70%)
+                        )`
+                      }}
+                    />
+                    
+                    {/* Main 3D Element */}
+                    <motion.div
+                      className="absolute inset-4 rounded-2xl shadow-2xl overflow-hidden group"
+                      style={{
+                        background: `linear-gradient(135deg, 
+                          hsl(${index * 60}, 60%, 50%), 
+                          hsl(${(index * 60) + 30}, 70%, 60%)
+                        )`,
+                        boxShadow: `0 25px 50px hsla(${index * 60}, 70%, 50%, 0.3)`
+                      }}
+                      whileHover={{ 
+                        scale: 1.05, 
+                        rotateY: 10,
+                        rotateX: 5
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Glass Effect Overlay */}
+                      <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
+                      
+                      {/* Step Image */}
+                      <img 
+                        src={step.image} 
+                        alt={step.title}
+                        className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-300"
                       />
                       
-                      {/* Main 3D Element */}
-                      <motion.div
-                        className="absolute inset-4 rounded-2xl shadow-2xl overflow-hidden group"
-                        style={{
-                          background: `linear-gradient(135deg, 
-                            hsl(${index * 60}, 60%, 50%), 
-                            hsl(${(index * 60) + 30}, 70%, 60%)
-                          )`,
-                          boxShadow: `0 25px 50px hsla(${index * 60}, 70%, 50%, 0.3)`
-                        }}
-                        whileHover={{ 
-                          scale: 1.05, 
-                          rotateY: 10,
-                          rotateX: 5
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {/* Glass Effect Overlay */}
-                        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
-                        
-                        {/* Step Image */}
-                        <img 
-                          src={step.image} 
-                          alt={step.title}
-                          className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-300"
-                        />
-                        
-                        {/* Number Overlay */}
-                        <div className="absolute top-4 right-4 w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
-                          <span className="text-2xl font-bold text-white">{step.number}</span>
-                        </div>
-                      </motion.div>
-                    </div>
+                      {/* Number Overlay */}
+                      <div className="absolute top-4 right-4 w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+                        <span className="text-2xl font-bold text-white">{step.number}</span>
+                      </div>
+                    </motion.div>
                   </div>
-                </motion.div>
+                </div>
+              </motion.div>
 
-                {/* Content */}
-                <motion.div 
-                  className="order-1 lg:order-2 space-y-8 text-center lg:text-left"
-                  initial={{ x: 50, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Process Number */}
-                  <div className="flex items-center justify-center lg:justify-start space-x-4">
-                    <span 
-                      className="text-6xl font-bold opacity-20"
-                      style={{ color: `hsl(${index * 60}, 70%, 60%)` }}
-                    >
-                      {step.number}
-                    </span>
-                    <div 
-                      className="w-24 h-1 rounded"
-                      style={{ backgroundColor: `hsl(${index * 60}, 70%, 60%)` }}
-                    />
-                  </div>
-                  
-                  {/* Title */}
-                  <h3 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
-                    {step.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-xl text-white/80 leading-relaxed max-w-lg">
-                    {step.description}
-                  </p>
-                </motion.div>
-              </div>
+              {/* Content */}
+              <motion.div 
+                className="space-y-8 text-center lg:text-left"
+                initial={{ x: 50, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                {/* Process Number */}
+                <div className="flex items-center justify-center lg:justify-start space-x-4">
+                  <span 
+                    className="text-6xl font-bold opacity-20"
+                    style={{ color: `hsl(${index * 60}, 70%, 60%)` }}
+                  >
+                    {step.number}
+                  </span>
+                  <div 
+                    className="w-24 h-1 rounded"
+                    style={{ backgroundColor: `hsl(${index * 60}, 70%, 60%)` }}
+                  />
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
+                  {step.title}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-xl text-white/80 leading-relaxed max-w-lg">
+                  {step.description}
+                </p>
+              </motion.div>
             </div>
           </div>
         ))}
       </div>
 
       {/* Navigation Dots */}
-      <div className="flex justify-center space-x-3 mt-12">
-        {steps.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => scrollToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              currentSlide === index 
-                ? 'bg-white scale-125' 
-                : 'bg-white/30 hover:bg-white/50'
-            }`}
-          />
-        ))}
+      <div className="absolute bottom-8 left-0 right-0 z-20">
+        <div className="flex justify-center space-x-3">
+          {steps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                currentSlide === index 
+                  ? 'bg-white scale-125' 
+                  : 'bg-white/30 hover:bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
