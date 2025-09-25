@@ -13,7 +13,7 @@ const Footer = () => {
               <img 
                 src="https://i.imgur.com/DUmbFoD.png" 
                 alt="4ME Engenharia" 
-                className="h-16 w-auto"
+                className="h-40 w-auto"
               />
               <p className="text-white text-lg font-medium">
                 O Arquétipo do Criador.
