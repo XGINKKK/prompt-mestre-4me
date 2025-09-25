@@ -30,23 +30,29 @@ const App = () => {
   }, []);
 
   return (
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          {/* Adicione o componente aqui, logo no início */}
-          <BackgroundImage />
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </HelmetProvider>
+    // Container principal com relative para criar contexto de empilhamento e fundo escuro
+    <div className="relative min-h-screen bg-black text-white">
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            {/* Estampa de fundo */}
+            <BackgroundImage />
+            <Toaster />
+            <Sonner />
+            {/* Conteúdo principal com z-index para ficar acima da estampa */}
+            <main className="relative z-10">
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </main>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </HelmetProvider>
+    </div>
   );
 };
 
