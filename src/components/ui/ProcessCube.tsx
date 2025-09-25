@@ -7,28 +7,10 @@ interface ProcessCubeProps {
 
 function Cube({ stepNumber }: ProcessCubeProps) {
   return (
-    <group>
-      <mesh>
-        <boxGeometry args={[2, 2, 2]} />
-        <meshStandardMaterial color="white" />
-      </mesh>
-      {/* Número renderizado como HTML sobre o cubo */}
-      <div 
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          fontSize: '4rem',
-          fontWeight: 'bold',
-          color: 'black',
-          pointerEvents: 'none',
-          zIndex: 10
-        }}
-      >
-        {stepNumber}
-      </div>
-    </group>
+    <mesh>
+      <boxGeometry args={[2, 2, 2]} />
+      <meshStandardMaterial color="white" />
+    </mesh>
   );
 }
 
@@ -47,9 +29,9 @@ const ProcessCube = ({ stepNumber }: ProcessCubeProps) => {
         </Suspense>
       </Canvas>
       
-      {/* Fallback: número sobreposto caso o 3D não funcione */}
+      {/* Número sobreposto fora do Canvas */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span className="text-4xl md:text-6xl lg:text-8xl font-bold text-white z-20">
+        <span className="text-4xl md:text-6xl lg:text-8xl font-bold text-black z-20">
           {stepNumber}
         </span>
       </div>
