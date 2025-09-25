@@ -1,4 +1,5 @@
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import SectionCTA from '@/components/ui/SectionCTA';
 
 const ProjectsSection = () => {
   return (
@@ -24,6 +25,17 @@ const ProjectsSection = () => {
                 Em breve você poderá conhecer em detalhes o nosso portfólio de excelência.
               </p>
             </div>
+          </div>
+        </ScrollReveal>
+        
+        {/* CTA Sutil */}
+        <ScrollReveal>
+          <div className="mt-16">
+            <SectionCTA 
+              variant="default"
+              title="Vamos criar algo incrível juntos?"
+              subtitle="Entre em contato e vamos transformar sua ideia em um projeto real e bem executado"
+            />
           </div>
         </ScrollReveal>
       </div>

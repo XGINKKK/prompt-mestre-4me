@@ -1,4 +1,5 @@
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import SectionCTA from '@/components/ui/SectionCTA';
 
 const ServicesSection = () => {
   const services = [
@@ -78,6 +79,17 @@ const ServicesSection = () => {
             </ScrollReveal>
           ))}
         </div>
+        
+        {/* CTA Sutil */}
+        <ScrollReveal>
+          <div className="mt-16">
+            <SectionCTA 
+              variant="floating"
+              title="Precisa de algum desses serviços?"
+              subtitle="Nossa equipe está pronta para desenvolver a solução ideal para seu projeto"
+            />
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

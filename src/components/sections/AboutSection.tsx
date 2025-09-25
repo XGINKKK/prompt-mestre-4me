@@ -1,4 +1,5 @@
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import SectionCTA from '@/components/ui/SectionCTA';
 
 const AboutSection = () => {
   return (
@@ -58,6 +59,17 @@ const AboutSection = () => {
             </div>
           </ScrollReveal>
         </div>
+        
+        {/* CTA Sutil */}
+        <ScrollReveal>
+          <div className="mt-16">
+            <SectionCTA 
+              variant="minimal"
+              title="Interessado em nossos serviços?"
+              subtitle="Solicite uma consulta gratuita e descubra como podemos ajudar"
+            />
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
