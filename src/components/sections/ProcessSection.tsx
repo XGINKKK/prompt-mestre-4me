@@ -118,7 +118,9 @@ const ProcessSection = () => {
         {/* Container dos slides horizontais */}
         <div className="relative flex-1 flex items-center">
           <div 
-            className="flex transition-transform duration-700 ease-out w-full"
+            className={`flex transition-all duration-700 ease-out w-full ${
+              isTransitioning ? 'opacity-30 scale-95' : 'opacity-100 scale-100'
+            }`}
             style={{ 
               transform: `translateX(-${currentIndex * 100}%)`,
             }}
@@ -126,7 +128,9 @@ const ProcessSection = () => {
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className="w-full flex-shrink-0 px-3 md:px-8 lg:px-16"
+                className={`w-full flex-shrink-0 px-3 md:px-8 lg:px-16 transition-opacity duration-500 ${
+                  index === currentIndex ? 'opacity-100' : 'opacity-60'
+                }`}
                 style={{ minWidth: '100%' }}
               >
                 <div className="max-w-6xl mx-auto">
