@@ -66,7 +66,7 @@ const Header = () => {
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="shrink-0 border-white/50 text-white hover:bg-white/10 hover:text-white">
+              <Button variant="outline" size="icon" className="shrink-0 bg-transparent border-white/50 text-white hover:bg-white/10 hover:text-white">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
