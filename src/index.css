@@ -119,16 +119,16 @@
     @apply bg-white/30;
   }
 
-  /* Process Section - DYNASTYAI SEQUENTIAL CARDS */
-  .process-section-sequential {
+  /* Process Section - CARDS UNIFORMES E TODOS OS 5 */
+  .process-section-uniform {
     position: relative;
     width: 100%;
-    height: 500vh; /* 5x a altura para dar tempo para cada card aparecer */
+    height: 600vh; /* 6x a altura para garantir que todos os cards apareçam */
     overflow: hidden;
     padding: 0;
   }
 
-  .process-sticky-sequential {
+  .process-sticky-uniform {
     position: sticky;
     top: 0;
     height: 100vh;
@@ -139,7 +139,7 @@
     overflow: hidden;
   }
 
-  .process-card-container {
+  .process-card-container-uniform {
     position: relative;
     width: 100%;
     height: 100%;
@@ -148,15 +148,16 @@
     justify-content: center;
   }
 
-  /* Cards - DynastyAI Style Sequential */
-  .process-card-sequential {
+  /* Cards - UNIFORMES E FIXOS */
+  .process-card-uniform {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 600px;
+    /* TAMANHOS FIXOS E UNIFORMES */
+    width: 650px;
+    height: 550px;
     max-width: 90vw;
-    height: 600px;
     max-height: 80vh;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(20px);
@@ -174,10 +175,11 @@
     scale: 0.8;
     filter: blur(10px);
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1;
   }
 
   /* Estado ativo do card */
-  .process-card-sequential.active {
+  .process-card-uniform.active {
     opacity: 1;
     scale: 1;
     filter: blur(0px);
@@ -185,14 +187,14 @@
   }
 
   /* Estado saindo do card */
-  .process-card-sequential.exiting {
+  .process-card-uniform.exiting {
     opacity: 0;
     scale: 1.1;
     filter: blur(5px);
     z-index: 5;
   }
 
-  .process-card-sequential::before {
+  .process-card-uniform::before {
     content: '';
     position: absolute;
     top: 0;
@@ -207,20 +209,21 @@
     );
   }
 
-  /* Header do card */
-  .process-header-sequential {
+  /* Header do card - UNIFORME */
+  .process-header-uniform {
     flex-shrink: 0;
     margin-bottom: 2rem;
+    height: 120px; /* Altura fixa para uniformizar */
   }
 
-  .process-number-sequential {
+  .process-number-uniform {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
-  .process-badge-sequential {
+  .process-badge-uniform {
     width: 4rem;
     height: 4rem;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
@@ -233,9 +236,10 @@
     font-weight: 700;
     color: white;
     backdrop-filter: blur(10px);
+    flex-shrink: 0;
   }
 
-  .process-divider-sequential {
+  .process-divider-uniform {
     flex: 1;
     height: 1px;
     background: linear-gradient(
@@ -245,43 +249,59 @@
     );
   }
 
-  .process-title-sequential {
+  .process-title-uniform {
     font-size: 2.5rem;
     font-weight: 700;
     color: white;
     line-height: 1.2;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    height: 60px; /* Altura fixa para uniformizar */
+    display: flex;
+    align-items: center;
   }
 
-  .process-description-sequential {
+  /* Conteúdo - UNIFORME */
+  .process-content-uniform {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 120px); /* Altura fixa */
+  }
+
+  .process-description-uniform {
     font-size: 1.25rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
-    max-width: 80%;
+    height: 120px; /* Altura fixa para uniformizar */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    margin-bottom: 2rem;
   }
 
-  .process-image-sequential {
+  .process-image-uniform {
     flex-shrink: 0;
-    height: 250px;
+    height: 200px; /* Altura fixa para uniformizar */
     border-radius: 1rem;
     overflow: hidden;
     position: relative;
-    margin-top: 2rem;
   }
 
-  .process-image-sequential img {
+  .process-image-uniform img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
   }
 
-  .process-card-sequential.active .process-image-sequential img {
+  .process-card-uniform.active .process-image-uniform img {
     transform: scale(1.05);
   }
 
   /* Gradient overlay */
-  .process-image-sequential::after {
+  .process-image-uniform::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -297,7 +317,7 @@
   }
 
   /* Progress indicator */
-  .process-progress-sequential {
+  .process-progress-uniform {
     position: fixed;
     bottom: 3rem;
     left: 50%;
@@ -307,7 +327,7 @@
     z-index: 100;
   }
 
-  .process-progress-step {
+  .process-progress-step-uniform {
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
@@ -317,39 +337,44 @@
     cursor: pointer;
   }
 
-  .process-progress-step.active {
+  .process-progress-step-uniform.active {
     background: rgba(255, 255, 255, 0.9);
     border-color: rgba(255, 255, 255, 1);
     transform: scale(1.2);
   }
 
-  .process-progress-step.completed {
+  .process-progress-step-uniform.completed {
     background: rgba(255, 255, 255, 0.6);
     border-color: rgba(255, 255, 255, 0.8);
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .process-card-sequential {
+    .process-card-uniform {
       width: 90vw;
       height: 500px;
       padding: 2rem;
     }
 
-    .process-title-sequential {
+    .process-header-uniform {
+      height: 100px;
+    }
+
+    .process-title-uniform {
       font-size: 2rem;
+      height: 50px;
     }
 
-    .process-description-sequential {
+    .process-description-uniform {
       font-size: 1.1rem;
-      max-width: 90%;
+      height: 100px;
     }
 
-    .process-image-sequential {
-      height: 200px;
+    .process-image-uniform {
+      height: 180px;
     }
 
-    .process-badge-sequential {
+    .process-badge-uniform {
       width: 3rem;
       height: 3rem;
       font-size: 1.25rem;
@@ -357,21 +382,27 @@
   }
 
   @media (max-width: 480px) {
-    .process-card-sequential {
+    .process-card-uniform {
       width: 95vw;
       height: 450px;
       padding: 1.5rem;
     }
 
-    .process-title-sequential {
+    .process-header-uniform {
+      height: 80px;
+    }
+
+    .process-title-uniform {
       font-size: 1.75rem;
+      height: 40px;
     }
 
-    .process-description-sequential {
+    .process-description-uniform {
       font-size: 1rem;
+      height: 80px;
     }
 
-    .process-image-sequential {
+    .process-image-uniform {
       height: 150px;
     }
   }

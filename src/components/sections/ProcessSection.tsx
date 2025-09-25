@@ -51,7 +51,7 @@ const ProcessSection = () => {
         (windowHeight - rect.top) / (windowHeight + rect.height)
       ));
       
-      // Calcula qual card deve estar ativo
+      // Calcula qual card deve estar ativo (0 a 4 para os 5 cards)
       const totalSteps = steps.length;
       const stepProgress = scrollProgress * totalSteps;
       const newIndex = Math.floor(stepProgress);
@@ -105,9 +105,9 @@ const ProcessSection = () => {
   return (
     <section 
       ref={containerRef} 
-      className="process-section-sequential"
+      className="process-section-uniform"
     >
-      <div className="process-sticky-sequential">
+      <div className="process-sticky-uniform">
         {/* Header fixo */}
         <div className="absolute top-0 left-0 w-full z-20 p-8">
           <div className="text-center">
@@ -121,9 +121,9 @@ const ProcessSection = () => {
         </div>
 
         {/* Container dos cards */}
-        <div className="process-card-container">
+        <div className="process-card-container-uniform">
           {steps.map((step, index) => {
-            let cardClass = 'process-card-sequential';
+            let cardClass = 'process-card-uniform';
             
             if (index === currentIndex) {
               cardClass += ' active';
@@ -137,27 +137,27 @@ const ProcessSection = () => {
                 className={cardClass}
               >
                 {/* Header com número e divisor */}
-                <div className="process-header-sequential">
-                  <div className="process-number-sequential">
-                    <div className="process-badge-sequential">
+                <div className="process-header-uniform">
+                  <div className="process-number-uniform">
+                    <div className="process-badge-uniform">
                       {step.number}
                     </div>
-                    <div className="process-divider-sequential" />
+                    <div className="process-divider-uniform" />
                   </div>
                   
-                  <h3 className="process-title-sequential">
+                  <h3 className="process-title-uniform">
                     {step.title}
                   </h3>
                 </div>
 
                 {/* Conteúdo */}
-                <div className="process-content-sequential">
-                  <div className="process-description-sequential">
+                <div className="process-content-uniform">
+                  <div className="process-description-uniform">
                     <p>{step.description}</p>
                   </div>
 
                   {/* Imagem */}
-                  <div className="process-image-sequential">
+                  <div className="process-image-uniform">
                     <img 
                       src={step.image} 
                       alt={step.title}
@@ -171,9 +171,9 @@ const ProcessSection = () => {
         </div>
 
         {/* Indicador de progresso */}
-        <div className="process-progress-sequential">
+        <div className="process-progress-uniform">
           {steps.map((_, index) => {
-            let stepClass = 'process-progress-step';
+            let stepClass = 'process-progress-step-uniform';
             
             if (index === currentIndex) {
               stepClass += ' active';
