@@ -71,8 +71,17 @@
 
   /* Engineering theme utilities */
   .engineering-card {
-    @apply bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl;
+    @apply bg-black/95 border border-white/20 rounded-xl;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: var(--shadow-card);
+  }
+  
+  /* Fallback para mobile sem suporte ao backdrop-filter */
+  @supports not (backdrop-filter: blur(20px)) {
+    .engineering-card {
+      background: rgba(0, 0, 0, 0.98);
+    }
   }
 
   .engineering-gradient {

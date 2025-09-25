@@ -167,7 +167,11 @@ const ProcessSection = () => {
         
         {/* Indicadores de progresso */}
         <div className="flex justify-center mt-4 md:mt-8 pb-2 md:pb-4">
-          <div className="flex space-x-2 md:space-x-4 bg-black/40 backdrop-blur-sm px-4 md:px-8 py-2 md:py-4 rounded-full border border-white/10">
+          <div className="flex space-x-2 md:space-x-4 px-4 md:px-8 py-2 md:py-4 rounded-full border border-white/20" style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)'
+          }}>
             {steps.map((_, index) => (
               <button
                 key={index}
