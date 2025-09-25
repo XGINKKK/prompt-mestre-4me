@@ -28,7 +28,7 @@ const MetricsSection = () => {
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Resultados que{' '}
               <span className="engineering-text-gradient">Inspiram</span>
             </h2>
@@ -46,10 +46,10 @@ const MetricsSection = () => {
                   <CountUp
                     value={metric.value}
                     suffix={metric.suffix}
-                    className="text-4xl md:text-5xl font-black text-white block"
+                    className="text-4xl md:text-5xl font-bold text-white block"
                   />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{metric.label}</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">{metric.label}</h3>
                 <p className="text-muted-foreground">{metric.description}</p>
               </div>
             </ScrollReveal>

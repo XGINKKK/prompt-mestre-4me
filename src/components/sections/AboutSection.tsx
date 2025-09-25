@@ -10,7 +10,7 @@ const AboutSection = () => {
             <div className="space-y-12">
               {/* Mission */}
               <div className="space-y-6">
-                <h2 className="text-4xl md:text-5xl font-black text-white">
+                <h2 className="text-4xl md:text-5xl font-bold text-white">
                   Nossa <span className="engineering-text-gradient">Missão</span>
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -23,7 +23,7 @@ const AboutSection = () => {
 
               {/* Vision */}
               <div className="space-y-6">
-                <h3 className="text-3xl md:text-4xl font-black text-white">
+                <h3 className="text-3xl md:text-4xl font-bold text-white">
                   Nossa <span className="engineering-text-gradient">Visão</span>
                 </h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">

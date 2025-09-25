@@ -49,7 +49,7 @@ const ProcessSection = () => {
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Nosso <span className="engineering-text-gradient">Processo</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -68,12 +68,12 @@ const ProcessSection = () => {
                 <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                   <div className="flex items-center space-x-4 mb-6">
                     <div className="w-16 h-16 engineering-card flex items-center justify-center">
-                      <span className="text-2xl font-black text-white">{step.number}</span>
+                      <span className="text-2xl font-bold text-white">{step.number}</span>
                     </div>
                     <div className="w-24 h-0.5 bg-accent" />
                   </div>
                   
-                  <h3 className="text-3xl font-black text-white">
+                  <h3 className="text-3xl font-bold text-white">
                     {step.title}
                   </h3>
                   

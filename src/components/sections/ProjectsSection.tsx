@@ -6,7 +6,7 @@ const ProjectsSection = () => {
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Portfólio de <span className="engineering-text-gradient">Projetos</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
@@ -19,7 +19,7 @@ const ProjectsSection = () => {
           <div className="max-w-2xl mx-auto text-center">
             <div className="engineering-card p-12">
               <div className="text-6xl mb-6">🚧</div>
-              <h3 className="text-2xl font-bold text-white mb-4">Em Breve...</h3>
+              <h3 className="text-2xl font-semibold text-white mb-4">Em Breve...</h3>
               <p className="text-muted-foreground leading-relaxed">
                 Estamos preparando uma galeria especial dos nossos projetos mais impactantes. 
                 Em breve você poderá conhecer em detalhes o nosso portfólio de excelência.

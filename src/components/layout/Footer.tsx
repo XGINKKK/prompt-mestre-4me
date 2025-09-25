@@ -22,7 +22,7 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div className="space-y-4">
-              <h4 className="text-white font-bold text-lg">Localização</h4>
+              <h4 className="text-white font-semibold text-lg">Localização</h4>
               <div className="space-y-2 text-muted-foreground">
                 <p>Rua Miguel Matte, N 687, Sala 1804</p>
                 <p>Bairro Pioneiros, Balneário Camboriú</p>
@@ -33,7 +33,7 @@ const Footer = () => {
 
             {/* Contact Details */}
             <div className="space-y-4">
-              <h4 className="text-white font-bold text-lg">Contato</h4>
+              <h4 className="text-white font-semibold text-lg">Contato</h4>
               <div className="space-y-2 text-muted-foreground">
                 <p>contato@4meengenharia.com</p>
                 <a 

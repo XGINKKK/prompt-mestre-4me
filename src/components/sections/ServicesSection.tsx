@@ -45,7 +45,7 @@ const ServicesSection = () => {
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Nossos <span className="engineering-text-gradient">Serviços</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -62,7 +62,7 @@ const ServicesSection = () => {
                 <div className="text-4xl mb-6 text-center">{service.icon}</div>
                 
                 {/* Title */}
-                <h3 className="text-2xl font-bold text-white mb-4 text-center">
+                <h3 className="text-2xl font-semibold text-white mb-4 text-center">
                   {service.title}
                 </h3>
                 

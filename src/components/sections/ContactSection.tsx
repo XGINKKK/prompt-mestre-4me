@@ -28,7 +28,7 @@ const ContactSection = () => {
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Entre em <span className="engineering-text-gradient">Contato</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -45,7 +45,7 @@ const ContactSection = () => {
                 <div key={info.title} className="engineering-card p-6 flex items-start space-x-4">
                   <div className="text-3xl">{info.icon}</div>
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2">{info.title}</h3>
+                    <h3 className="text-xl font-semibold text-white mb-2">{info.title}</h3>
                     {info.details.map((detail, detailIndex) => (
                       <p key={detailIndex} className="text-muted-foreground">
                         {detail}
@@ -85,7 +85,7 @@ const ContactSection = () => {
             <div className="engineering-card p-8 h-full flex items-center justify-center">
               <div className="text-center">
                 <div className="text-8xl mb-6">🗺️</div>
-                <h3 className="text-2xl font-bold text-white mb-4">Localização</h3>
+                <h3 className="text-2xl font-semibold text-white mb-4">Localização</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Atendemos toda a região de Santa Catarina, incluindo Grande Florianópolis, 
                   Itajaí, Blumenau e Joinville. Nossa localização estratégica em Balneário 
