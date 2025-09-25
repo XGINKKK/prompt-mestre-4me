@@ -1,15 +1,9 @@
-import { useScroll, useTransform, motion } from 'framer-motion';
-import { useRef } from 'react';
-import ScrollReveal from '@/components/ui/ScrollReveal';
+import { useRef, useEffect, useState } from 'react';
 
 const ProcessSection = () => {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const trackRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const steps = [
     {
@@ -44,11 +38,51 @@ const ProcessSection = () => {
     }
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current || !trackRef.current) return;
+
+      const container = containerRef.current;
+      const track = trackRef.current;
+      
+      // Pega a posição do scroll da seção
+      const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calcula o progresso do scroll (0 a 1)
+      const scrollProgress = Math.max(0, Math.min(1, 
+        (windowHeight - rect.top) / (windowHeight + rect.height)
+      ));
+      
+      // Calcula quanto mover horizontalmente
+      const maxScroll = track.scrollWidth - window.innerWidth;
+      const translateX = scrollProgress * maxScroll;
+      
+      // Aplica a transformação
+      track.style.transform = `translateX(-${translateX}px)`;
+      
+      // Atualiza o indicador de progresso
+      const cardIndex = Math.floor(scrollProgress * (steps.length - 1));
+      setCurrentIndex(cardIndex);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Chama uma vez para definir a posição inicial
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [steps.length]);
+
   return (
-    <section ref={containerRef} className="relative z-10 bg-background process-section-wrapper">
-      <div className="container mx-auto px-4">
-        <ScrollReveal>
-          <div className="text-center mb-16">
+    <section 
+      ref={containerRef} 
+      className="process-section-fake-scroll"
+    >
+      <div className="process-sticky-container">
+        {/* Header fixo */}
+        <div className="absolute top-0 left-0 w-full z-10 p-8">
+          <div className="text-center">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Nosso <span className="engineering-text-gradient">Processo</span>
             </h2>
@@ -56,61 +90,59 @@ const ProcessSection = () => {
               Da concepção à execução, um fluxo de trabalho preciso e transparente que garante excelência em cada etapa.
             </p>
           </div>
-        </ScrollReveal>
-
-        {/* Container com scroll horizontal estilo DynastyAI */}
-        <div className="process-horizontal-container">
-          <div className="process-horizontal-scroll">
-            {steps.map((step, index) => (
-              <ScrollReveal key={step.number} delay={index * 0.1}>
-                <motion.div 
-                  className="process-step-card"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {/* Header com número e divisor */}
-                  <div className="process-step-header">
-                    <div className="process-step-number">
-                      <div className="process-number-badge">
-                        {step.number}
-                      </div>
-                      <div className="process-divider" />
-                    </div>
-                    
-                    <h3 className="process-step-title">
-                      {step.title}
-                    </h3>
-                  </div>
-
-                  {/* Descrição */}
-                  <div className="process-step-description">
-                    <p>{step.description}</p>
-                  </div>
-
-                  {/* Imagem com efeito parallax */}
-                  <motion.div 
-                    style={{ y: index % 2 === 0 ? y : undefined }}
-                    className="process-step-image"
-                  >
-                    <img 
-                      src={step.image} 
-                      alt={step.title}
-                      loading="lazy"
-                    />
-                  </motion.div>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
         </div>
 
-        {/* Indicador de scroll */}
-        <div className="flex justify-center mt-8">
-          <div className="flex space-x-2">
-            <div className="w-2 h-2 bg-white/30 rounded-full"></div>
-            <div className="w-2 h-2 bg-white/60 rounded-full"></div>
-            <div className="w-2 h-2 bg-white/30 rounded-full"></div>
-          </div>
+        {/* Track horizontal que se move */}
+        <div 
+          ref={trackRef}
+          className="process-horizontal-track"
+        >
+          {steps.map((step, index) => (
+            <div 
+              key={step.number}
+              className="process-card-fake-scroll"
+            >
+              {/* Header com número e divisor */}
+              <div className="process-header-fake-scroll">
+                <div className="process-number-fake-scroll">
+                  <div className="process-badge-fake-scroll">
+                    {step.number}
+                  </div>
+                  <div className="process-divider-fake-scroll" />
+                </div>
+                
+                <h3 className="process-title-fake-scroll">
+                  {step.title}
+                </h3>
+              </div>
+
+              {/* Conteúdo */}
+              <div className="process-content-fake-scroll">
+                <div className="process-description-fake-scroll">
+                  <p>{step.description}</p>
+                </div>
+
+                {/* Imagem */}
+                <div className="process-image-fake-scroll">
+                  <img 
+                    src={step.image} 
+                    alt={step.title}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Indicador de progresso */}
+        <div className="process-progress-indicator">
+          {steps.map((_, index) => (
+            <div 
+              key={index}
+              className={`process-progress-dot ${index === currentIndex ? 'active' : ''}`}
+            />
+          ))}
         </div>
       </div>
     </section>

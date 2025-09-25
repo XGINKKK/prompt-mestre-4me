@@ -119,329 +119,313 @@
     @apply bg-white/30;
   }
 
-  /* Process Section - BLOQUEIO TOTAL DE SCROLL VERTICAL PARA REACT/VITE */
-  .process-section-wrapper {
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
-    max-height: 100vh !important;
-    overflow: hidden !important;
-    padding: 5rem 0 !important;
-    /* Força o bloqueio total */
-    overscroll-behavior-y: none !important;
-    overscroll-behavior-x: auto !important;
-    touch-action: pan-x !important;
+  /* Process Section - FAKE HORIZONTAL SCROLL (Vertical scroll moves horizontal) */
+  .process-section-fake-scroll {
+    position: relative;
+    width: 100%;
+    height: 300vh; /* 3x a altura da viewport para criar espaço de scroll */
+    overflow: hidden;
+    padding: 0;
   }
 
-  .process-horizontal-container {
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
-    max-height: calc(100vh - 300px) !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    scroll-behavior: smooth !important;
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-    /* Bloqueio total do scroll vertical */
-    overscroll-behavior-y: none !important;
-    overscroll-behavior-x: auto !important;
-    touch-action: pan-x !important;
-    cursor: grab !important;
-    /* Previne qualquer scroll vertical */
-    -webkit-overflow-scrolling: auto !important;
-    scroll-snap-type: x mandatory !important;
+  .process-sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
   }
 
-  .process-horizontal-container:active {
-    cursor: grabbing !important;
-  }
-
-  /* Remove TODAS as scrollbars verticais */
-  .process-horizontal-container::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-  }
-
-  .process-horizontal-container::-webkit-scrollbar:vertical {
-    display: none !important;
-  }
-
-  .process-horizontal-container::-webkit-scrollbar:horizontal {
-    height: 8px !important;
-  }
-
-  .process-horizontal-scroll {
-    display: flex !important;
-    gap: 2rem !important;
-    padding: 2rem 0 !important;
-    width: max-content !important;
-    min-width: 100% !important;
-    align-items: stretch !important;
-    height: 100% !important;
-    /* Previne quebra de linha */
-    flex-wrap: nowrap !important;
-    /* Efeito de fade nas bordas */
+  .process-horizontal-track {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+    width: max-content;
+    min-width: 100%;
+    align-items: center;
+    height: 100%;
+    flex-wrap: nowrap;
+    /* Fade effect on edges */
     mask-image: linear-gradient(
       to right,
       transparent 0%,
       black 5%,
       black 95%,
       transparent 100%
-    ) !important;
+    );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
       black 5%,
       black 95%,
       transparent 100%
-    ) !important;
-    /* Força o scroll horizontal */
-    scroll-snap-align: start !important;
+    );
+    /* Transform será controlado via JavaScript */
+    transform: translateX(0);
+    transition: transform 0.1s ease-out;
   }
 
-  /* Cards uniformizados - BLOQUEIO TOTAL DE SCROLL VERTICAL */
-  .process-step-card {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    width: 380px !important;
-    min-width: 380px !important;
-    max-width: 380px !important;
-    height: 520px !important;
-    min-height: 520px !important;
-    max-height: 520px !important;
-    flex-shrink: 0 !important;
-    background: rgba(0, 0, 0, 0.6) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 1.5rem !important;
-    padding: 2rem !important;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    cursor: pointer !important;
-    overflow: hidden !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    box-sizing: border-box !important;
-    /* BLOQUEIO TOTAL DE SCROLL VERTICAL NO CARD */
-    overscroll-behavior-y: none !important;
-    touch-action: pan-x !important;
+  /* Cards - Fake scroll optimized */
+  .process-card-fake-scroll {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+    height: 500px;
+    min-height: 500px;
+    max-height: 500px;
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    margin: 0 1rem;
   }
 
-  .process-step-card::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 1px !important;
+  .process-card-fake-scroll::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
     background: linear-gradient(
       90deg,
       transparent,
       rgba(255, 255, 255, 0.4),
       transparent
-    ) !important;
+    );
   }
 
-  .process-step-card:hover {
-    transform: translateY(-8px) scale(1.02) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
+  .process-card-fake-scroll:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.3);
     box-shadow: 
       0 20px 40px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(255, 255, 255, 0.1) !important;
-    background: rgba(0, 0, 0, 0.7) !important;
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.7);
   }
 
-  .process-step-card:hover::before {
+  .process-card-fake-scroll:hover::before {
     background: linear-gradient(
       90deg,
       transparent,
       rgba(255, 255, 255, 0.8),
       transparent
-    ) !important;
+    );
   }
 
-  /* Conteúdo do card - SEM SCROLL VERTICAL */
-  .process-step-content {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    height: 100% !important;
-    position: relative !important;
-    z-index: 2 !important;
-    overflow: hidden !important;
-    /* BLOQUEIO TOTAL */
-    overscroll-behavior-y: none !important;
+  /* Card content */
+  .process-content-fake-scroll {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
   }
 
-  .process-step-header {
-    flex-shrink: 0 !important;
-    margin-bottom: 1.5rem !important;
-    overflow: hidden !important;
+  .process-header-fake-scroll {
+    flex-shrink: 0;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
   }
 
-  .process-step-number {
-    display: flex !important;
-    align-items: center !important;
-    gap: 1rem !important;
-    margin-bottom: 1rem !important;
+  .process-number-fake-scroll {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
 
-  .process-number-badge {
-    width: 3rem !important;
-    height: 3rem !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 0.75rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 1.25rem !important;
-    font-weight: 700 !important;
-    color: white !important;
-    backdrop-filter: blur(10px) !important;
+  .process-badge-fake-scroll {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    backdrop-filter: blur(10px);
   }
 
-  .process-divider {
-    flex: 1 !important;
-    height: 1px !important;
+  .process-divider-fake-scroll {
+    flex: 1;
+    height: 1px;
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0.3),
       transparent
-    ) !important;
+    );
   }
 
-  .process-step-title {
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
-    color: white !important;
-    line-height: 1.3 !important;
-    margin-bottom: 1rem !important;
-    overflow: hidden !important;
+  .process-title-fake-scroll {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    overflow: hidden;
   }
 
-  .process-step-description {
-    flex: 1 !important;
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-    overflow: hidden !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 4 !important;
-    -webkit-box-orient: vertical !important;
-    /* BLOQUEIO TOTAL */
-    overscroll-behavior-y: none !important;
+  .process-description-fake-scroll {
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 
-  .process-step-image {
-    flex-shrink: 0 !important;
-    height: 200px !important;
-    margin-top: 1.5rem !important;
-    border-radius: 0.75rem !important;
-    overflow: hidden !important;
-    position: relative !important;
+  .process-image-fake-scroll {
+    flex-shrink: 0;
+    height: 180px;
+    margin-top: 1.5rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    position: relative;
   }
 
-  .process-step-image img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    transition: transform 0.4s ease !important;
+  .process-image-fake-scroll img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
   }
 
-  .process-step-card:hover .process-step-image img {
-    transform: scale(1.05) !important;
+  .process-card-fake-scroll:hover .process-image-fake-scroll img {
+    transform: scale(1.05);
   }
 
-  /* Gradiente overlay na imagem */
-  .process-step-image::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 50% !important;
+  /* Gradient overlay */
+  .process-image-fake-scroll::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
     background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.7),
       transparent
-    ) !important;
-    pointer-events: none !important;
+    );
+    pointer-events: none;
   }
 
-  /* Responsive adjustments */
+  /* Progress indicator */
+  .process-progress-indicator {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 100;
+  }
+
+  .process-progress-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .process-progress-dot.active {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.2);
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .process-step-card {
-      width: 320px !important;
-      min-width: 320px !important;
-      max-width: 320px !important;
-      height: 460px !important;
-      min-height: 460px !important;
-      max-height: 460px !important;
-      padding: 1.5rem !important;
+    .process-card-fake-scroll {
+      width: 320px;
+      min-width: 320px;
+      max-width: 320px;
+      height: 420px;
+      min-height: 420px;
+      max-height: 420px;
+      padding: 1.5rem;
     }
 
-    .process-horizontal-scroll {
-      gap: 1.5rem !important;
-      padding: 1rem 0 !important;
+    .process-horizontal-track {
+      gap: 1.5rem;
+      padding: 1rem 0;
     }
 
-    .process-step-image {
-      height: 160px !important;
+    .process-image-fake-scroll {
+      height: 140px;
     }
 
-    .process-step-title {
-      font-size: 1.25rem !important;
+    .process-title-fake-scroll {
+      font-size: 1.25rem;
     }
   }
 
   @media (max-width: 480px) {
-    .process-step-card {
-      width: 280px !important;
-      min-width: 280px !important;
-      max-width: 280px !important;
-      height: 420px !important;
-      min-height: 420px !important;
-      max-height: 420px !important;
-      padding: 1.25rem !important;
+    .process-card-fake-scroll {
+      width: 280px;
+      min-width: 280px;
+      max-width: 280px;
+      height: 380px;
+      min-height: 380px;
+      max-height: 380px;
+      padding: 1.25rem;
     }
 
-    .process-step-image {
-      height: 140px !important;
+    .process-image-fake-scroll {
+      height: 120px;
     }
 
-    .process-step-title {
-      font-size: 1.125rem !important;
+    .process-title-fake-scroll {
+      font-size: 1.125rem;
     }
 
-    .process-step-description {
-      font-size: 0.9rem !important;
+    .process-description-fake-scroll {
+      font-size: 0.9rem;
     }
   }
 
-  /* Animações de entrada */
-  @keyframes slideInFromRight {
+  /* Animations */
+  @keyframes slideInFakeScroll {
     from {
       opacity: 0;
-      transform: translateX(50px);
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
 
-  .process-step-card {
-    animation: slideInFromRight 0.6s ease-out !important;
+  .process-card-fake-scroll {
+    animation: slideInFakeScroll 0.8s ease-out;
   }
 
-  .process-step-card:nth-child(1) { animation-delay: 0.1s !important; }
-  .process-step-card:nth-child(2) { animation-delay: 0.2s !important; }
-  .process-step-card:nth-child(3) { animation-delay: 0.3s !important; }
-  .process-step-card:nth-child(4) { animation-delay: 0.4s !important; }
-  .process-step-card:nth-child(5) { animation-delay: 0.5s !important; }
+  .process-card-fake-scroll:nth-child(1) { animation-delay: 0.1s; }
+  .process-card-fake-scroll:nth-child(2) { animation-delay: 0.2s; }
+  .process-card-fake-scroll:nth-child(3) { animation-delay: 0.3s; }
+  .process-card-fake-scroll:nth-child(4) { animation-delay: 0.4s; }
+  .process-card-fake-scroll:nth-child(5) { animation-delay: 0.5s; }
 }
 
 @layer base {
