@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import ProcessCube from '@/components/ui/ProcessCube';
 
 const ProcessSection = () => {
   const containerRef = useRef(null);
@@ -131,76 +132,10 @@ const ProcessSection = () => {
                 <div className="max-w-6xl mx-auto">
                   <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 md:gap-12 lg:gap-20 items-center">
                     
-                    {/* Cubo 3D unificado */}
+                    {/* Cubo 3D */}
                     <div className="flex justify-center lg:justify-end order-2 lg:order-1">
-                      <div className="relative" style={{ perspective: '800px' }}>
-                        {/* Container do cubo 3D */}
-                        <div 
-                          className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80"
-                          style={{ 
-                            transformStyle: 'preserve-3d',
-                            transform: 'rotateX(-15deg) rotateY(25deg)'
-                          }}
-                        >
-                          
-                          {/* Face frontal */}
-                          <div 
-                            className="absolute inset-0 bg-white border-2 border-gray-300 flex items-center justify-center"
-                            style={{ 
-                              transform: 'translateZ(60px)',
-                              transformStyle: 'preserve-3d'
-                            }}
-                          >
-                            <span className="text-4xl md:text-6xl lg:text-8xl font-semibold text-gray-800 leading-none">
-                              {step.number}
-                            </span>
-                          </div>
-                          
-                          {/* Face traseira */}
-                          <div 
-                            className="absolute inset-0 bg-gray-100 border-2 border-gray-300"
-                            style={{ 
-                              transform: 'translateZ(-60px) rotateY(180deg)'
-                            }}
-                          ></div>
-                          
-                          {/* Face direita */}
-                          <div 
-                            className="absolute inset-0 bg-gray-200 border-2 border-gray-400"
-                            style={{ 
-                              transform: 'rotateY(90deg) translateZ(60px)',
-                              transformOrigin: 'right center'
-                            }}
-                          ></div>
-                          
-                          {/* Face esquerda */}
-                          <div 
-                            className="absolute inset-0 bg-gray-300 border-2 border-gray-400"
-                            style={{ 
-                              transform: 'rotateY(-90deg) translateZ(60px)',
-                              transformOrigin: 'left center'
-                            }}
-                          ></div>
-                          
-                          {/* Face superior */}
-                          <div 
-                            className="absolute inset-0 bg-gray-50 border-2 border-gray-300"
-                            style={{ 
-                              transform: 'rotateX(90deg) translateZ(60px)',
-                              transformOrigin: 'top center'
-                            }}
-                          ></div>
-                          
-                          {/* Face inferior */}
-                          <div 
-                            className="absolute inset-0 bg-gray-400 border-2 border-gray-500"
-                            style={{ 
-                              transform: 'rotateX(-90deg) translateZ(60px)',
-                              transformOrigin: 'bottom center'
-                            }}
-                          ></div>
-                        </div>
-                        
+                      <div className="relative">
+                        <ProcessCube stepNumber={step.number} />
                         {/* Sombra do cubo */}
                         <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-32 h-16 md:w-40 md:h-20 lg:w-48 lg:h-24 bg-black/20 rounded-full blur-lg"></div>
                       </div>
