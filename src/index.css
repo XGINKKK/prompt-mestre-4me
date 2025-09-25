@@ -140,7 +140,19 @@
   section:not([id="hero"]) {
     position: relative;
     overflow: hidden;
+}
+
+/* Scroll lateral para seção de processos */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
 }
 
 @layer base {
