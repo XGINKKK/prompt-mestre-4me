@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import Lenis from '@studio-freight/lenis';
-import BackgroundImage from "./components/ui/BackgroundImage";
+
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -35,8 +35,6 @@ const App = () => {
       <HelmetProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            {/* Estampa de fundo */}
-            <BackgroundImage />
             <Toaster />
             <Sonner />
             {/* Conteúdo principal com z-index para ficar acima da estampa */}
