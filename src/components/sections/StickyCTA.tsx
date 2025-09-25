@@ -25,16 +25,14 @@ const StickyCTA = () => {
         animate={{
           width: isExpanded ? "auto" : "56px",
           height: "56px",
+          borderRadius: isExpanded ? "28px" : "50%",
           paddingLeft: isExpanded ? "16px" : "0",
           paddingRight: isExpanded ? "16px" : "0"
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         <div className="flex items-center justify-center h-full">
-          {/* Ícone WhatsApp sempre visível */}
-          <MessageCircle size={24} className="flex-shrink-0" />
-          
-          {/* Texto expandido */}
+          {/* Logo expandida */}
           <AnimatePresence>
             {isExpanded && (
               <motion.div
@@ -42,12 +40,22 @@ const StickyCTA = () => {
                 animate={{ opacity: 1, width: "auto" }}
                 exit={{ opacity: 0, width: 0 }}
                 transition={{ duration: 0.3 }}
-                className="ml-3 whitespace-nowrap"
+                className="flex items-center space-x-3 mr-3"
               >
-                <span className="text-sm font-medium">WhatsApp</span>
+                <img 
+                  src="https://i.imgur.com/H0q0jWu.png" 
+                  alt="4ME" 
+                  className="h-8 w-8 rounded-lg bg-white/20 p-1 flex-shrink-0"
+                />
+                <div className="text-left whitespace-nowrap">
+                  <div className="text-sm font-semibold">4ME Engenharia</div>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
+          
+          {/* Ícone WhatsApp sempre visível */}
+          <MessageCircle size={24} className="flex-shrink-0" />
         </div>
         
         {/* Pulse sutil */}
