@@ -6,6 +6,69 @@ const ProcessSection = () => {
   const containerRef = useRef(null);
   const [currentStep, setCurrentStep] = useState(0);
   
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Controle de navegação mais simples e direto
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let isScrolling = false;
+
+    const handleWheel = (e) => {
+      // Verificar se estamos na área da seção
+      const rect = container.getBoundingClientRect();
+      const isInViewport = rect.top <= window.innerHeight && rect.bottom >= 0;
+      
+      if (isInViewport && !isScrolling) {
+        e.preventDefault();
+        isScrolling = true;
+        
+        // Debounce para evitar mudanças muito rápidas
+        setTimeout(() => {
+          if (e.deltaY > 0 && currentStep < steps.length - 1) {
+            setCurrentStep(prev => prev + 1);
+          } else if (e.deltaY < 0 && currentStep > 0) {
+            setCurrentStep(prev => prev - 1);
+          }
+          
+          // Reset do debounce
+          setTimeout(() => {
+            isScrolling = false;
+          }, 300);
+        }, 50);
+      }
+    };
+
+    // Auto-avançar baseado no scroll da página
+    const handlePageScroll = () => {
+      const rect = container.getBoundingClientRect();
+      const containerHeight = container.offsetHeight;
+      const windowHeight = window.innerHeight;
+      
+      if (rect.top <= 0 && rect.bottom >= windowHeight) {
+        const scrollProgress = Math.abs(rect.top) / (containerHeight - windowHeight);
+        const newStep = Math.min(
+          Math.floor(scrollProgress * steps.length), 
+          steps.length - 1
+        );
+        setCurrentStep(newStep);
+      }
+    };
+
+    // Adicionar listeners
+    document.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('scroll', handlePageScroll, { passive: true });
+    
+    return () => {
+      document.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('scroll', handlePageScroll);
+    };
+  }, [currentStep, steps.length]);
+
   const steps = [
     {
       number: '01',
@@ -39,56 +102,6 @@ const ProcessSection = () => {
     }
   ];
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  // Forçar o comportamento de scroll horizontal
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const rect = container.getBoundingClientRect();
-      const containerHeight = container.offsetHeight;
-      const windowHeight = window.innerHeight;
-      
-      // Se a seção está visível
-      if (rect.top <= 0 && rect.bottom >= windowHeight) {
-        // Calcular progresso do scroll dentro da seção
-        const progress = Math.abs(rect.top) / (containerHeight - windowHeight);
-        const stepIndex = Math.floor(progress * steps.length);
-        setCurrentStep(Math.min(stepIndex, steps.length - 1));
-      }
-    };
-
-    // Interceptar scroll do mouse dentro da seção
-    const handleWheel = (e) => {
-      const rect = container.getBoundingClientRect();
-      const isInSection = rect.top <= 100 && rect.bottom >= 100;
-      
-      if (isInSection) {
-        e.preventDefault();
-        
-        // Avançar ou voltar etapas baseado na direção do scroll
-        if (e.deltaY > 0 && currentStep < steps.length - 1) {
-          setCurrentStep(prev => prev + 1);
-        } else if (e.deltaY < 0 && currentStep > 0) {
-          setCurrentStep(prev => prev - 1);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    container.addEventListener('wheel', handleWheel, { passive: false });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      container.removeEventListener('wheel', handleWheel);
-    };
-  }, [currentStep, steps.length]);
-
   // Calcular opacidade baseado no estado atual
   const getStepOpacity = (index) => {
     if (index === currentStep) return 1;
@@ -113,60 +126,110 @@ const ProcessSection = () => {
             </p>
           </div>
           
-          {/* Container dos slides - todos empilhados */}
-          <div className="relative h-screen flex items-center justify-center pt-32 md:pt-0">
+          {/* Container dos slides - cada um ocupa tela inteira */}
+          <div className="relative h-screen flex items-center justify-center">
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className="absolute inset-0 flex items-center justify-center px-4 transition-opacity duration-500"
+                className="absolute inset-0 flex items-center justify-center px-8 transition-opacity duration-700"
                 style={{ 
                   opacity: getStepOpacity(index),
                   zIndex: index === currentStep ? 10 : 5
                 }}
               >
-                <div className="container mx-auto max-w-6xl">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    
-                    {/* Visual/Imagem */}
-                    <div className="flex justify-center">
-                      <div className="relative group">
-                        {/* Elemento 3D inspirado no DynastyAI */}
-                        <div className="w-80 h-80 engineering-card p-6 relative overflow-hidden hover:scale-105 transition-transform duration-500">
-                          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-blue-600/20 to-cyan-500/20 backdrop-blur-sm rounded-lg"></div>
-                          <img 
-                            src={step.image} 
-                            alt={step.title}
-                            className="relative z-10 w-full h-full object-cover rounded-lg"
-                          />
-                          {/* Número sobreposto */}
-                          <div className="absolute top-4 left-4 z-20">
-                            <div className="w-12 h-12 bg-accent/90 backdrop-blur-sm rounded-full flex items-center justify-center">
-                              <span className="text-lg font-bold text-white">{step.number}</span>
+                {/* Layout full-width como DynastyAI */}
+                <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[60vh]">
+                  
+                  {/* Visual 3D - Lado Esquerdo */}
+                  <div className="flex justify-center items-center">
+                    <div className="relative group">
+                      {/* Cubo 3D estilo DynastyAI */}
+                      <div className="w-96 h-96 relative transform-gpu perspective-1000">
+                        {/* Container do cubo principal */}
+                        <div className="w-full h-full bg-gradient-to-br from-purple-500 via-blue-600 to-cyan-500 rounded-3xl shadow-2xl transform rotate-3 hover:rotate-6 transition-all duration-700 relative overflow-hidden">
+                          {/* Efeito glass morphism */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/20 backdrop-blur-sm"></div>
+                          
+                          {/* Círculo/anel interno como no exemplo */}
+                          <div className="absolute inset-8 border-4 border-white/30 rounded-full flex items-center justify-center">
+                            <div className="w-32 h-32 border-4 border-white/50 rounded-full flex items-center justify-center">
+                              <div className="w-16 h-16 bg-white/20 rounded-full backdrop-blur-sm flex items-center justify-center">
+                                <span className="text-2xl font-bold text-white">{step.number}</span>
+                              </div>
                             </div>
                           </div>
+                          
+                          {/* Efeitos de brilho */}
+                          <div className="absolute top-4 left-4 w-8 h-8 bg-white/20 rounded-full blur-sm"></div>
+                          <div className="absolute bottom-6 right-6 w-4 h-4 bg-white/30 rounded-full blur-sm"></div>
                         </div>
+                        
+                        {/* Sombra/reflexo adicional */}
+                        <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent blur-xl"></div>
                       </div>
                     </div>
-                    
-                    {/* Conteúdo */}
-                    <div className="text-white space-y-6">
-                      <div className="text-accent font-semibold text-lg">
+                  </div>
+                  
+                  {/* Conteúdo - Lado Direito */}
+                  <div className="text-white space-y-8">
+                    <div>
+                      <div className="text-accent font-semibold text-xl mb-4 tracking-wide">
                         Etapa {step.number}
                       </div>
                       
-                      <h3 className="text-4xl lg:text-5xl font-bold leading-tight">
+                      <h3 className="text-5xl lg:text-6xl font-bold leading-tight mb-8 tracking-tight">
                         {step.title}
                       </h3>
                       
-                      <p className="text-gray-300 text-lg leading-relaxed">
+                      <p className="text-gray-300 text-xl leading-relaxed max-w-xl">
                         {step.description}
                       </p>
                     </div>
                     
+                    {/* CTA Button como no DynastyAI */}
+                    <div className="pt-4">
+                      <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-white font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        Saiba Mais
+                      </button>
+                    </div>
                   </div>
+                  
                 </div>
               </div>
             ))}
+          </div>
+          
+          {/* Navegação com setas (adicional) */}
+          <div className="absolute left-8 top-1/2 transform -translate-y-1/2 z-10">
+            <button
+              onClick={() => currentStep > 0 && setCurrentStep(prev => prev - 1)}
+              disabled={currentStep === 0}
+              className={`w-12 h-12 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all ${
+                currentStep === 0 
+                  ? 'opacity-30 cursor-not-allowed' 
+                  : 'opacity-70 hover:opacity-100 hover:bg-white/10'
+              }`}
+            >
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          </div>
+          
+          <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-10">
+            <button
+              onClick={() => currentStep < steps.length - 1 && setCurrentStep(prev => prev + 1)}
+              disabled={currentStep === steps.length - 1}
+              className={`w-12 h-12 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all ${
+                currentStep === steps.length - 1 
+                  ? 'opacity-30 cursor-not-allowed' 
+                  : 'opacity-70 hover:opacity-100 hover:bg-white/10'
+              }`}
+            >
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
           
           {/* Indicadores de progresso */}
