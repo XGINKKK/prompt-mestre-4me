@@ -28,11 +28,7 @@ const Header = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`sticky top-0 z-50 w-full text-white transition-all duration-300 ${
-        isScrolled 
-          ? 'border-b border-white/10 bg-black/80 backdrop-blur-xl' 
-          : 'bg-transparent'
-      }`}
+      className="sticky top-0 z-50 w-full text-white bg-transparent transition-all duration-300"
     >
       <div className="container flex h-20 items-center justify-between">
         {/* Logo */}
