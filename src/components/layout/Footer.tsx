@@ -11,9 +11,9 @@ const Footer = () => {
             {/* Logo and Tagline */}
             <div className="space-y-4">
               <img 
-                src="/src/assets/4me-logo.png" 
+                src="https://i.imgur.com/DUmbFoD.png" 
                 alt="4ME Engenharia" 
-                className="h-24 w-auto object-contain"
+                className="h-10 w-auto"
               />
               <p className="text-white text-lg font-medium">
                 O Arquétipo do Criador.
