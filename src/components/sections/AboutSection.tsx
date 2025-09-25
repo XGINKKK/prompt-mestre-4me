@@ -48,7 +48,7 @@ const AboutSection = () => {
               </div>
               
               {/* Floating Logo */}
-              <div className="absolute -bottom-6 -left-6 engineering-card p-4">
+              <div className="absolute -bottom-6 left-0 md:-left-6 engineering-card p-4">
                 <img 
                   src="https://i.imgur.com/tD8iFcw.png" 
                   alt="4ME Engenharia Logo" 
