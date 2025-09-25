@@ -1,24 +1,29 @@
 const BackgroundImage = () => {
   return (
-    // Div que fica fixo, atrás de tudo, com opacidade mais visível no mobile
+    // Background pattern com CSS inline para evitar conflitos no mobile
     <div 
-      className="pointer-events-none fixed inset-0 z-[-1]"
+      className="pointer-events-none fixed inset-0"
       style={{
-        opacity: 0.12, // Aumentei de 0.05 para 0.12 para melhor visibilidade no mobile
-        transform: 'translateZ(0)', // Força aceleração de hardware no mobile
-        willChange: 'opacity' // Otimiza para animações
+        zIndex: -1,
+        opacity: 0.15,
+        background: '#000000', // Background preto sólido primeiro
+        transform: 'translateZ(0)',
+        willChange: 'opacity'
       }}
     >
-      <img
-        src="https://i.imgur.com/gjBoffg.png" 
-        alt=""
-        className="w-full h-full object-cover invert"
+      <div
         style={{
-          imageRendering: 'auto', // Melhor renderização no mobile
-          backfaceVisibility: 'hidden', // Otimização para mobile
-          transform: 'translateZ(0)' // Força aceleração de hardware
+          width: '100%',
+          height: '100%',
+          backgroundImage: 'url(https://i.imgur.com/gjBoffg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          filter: 'invert(1)', // Inverte cores (preto vira branco)
+          opacity: 1,
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden'
         }}
-        loading="eager" // Carrega imagem imediatamente
       />
     </div>
   );

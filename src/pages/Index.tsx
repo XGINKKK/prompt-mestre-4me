@@ -27,7 +27,7 @@ const Index = () => {
         <link rel="canonical" href="https://4meengenharia.com" />
       </Helmet>
 
-      <div className="relative min-h-screen bg-background text-foreground">
+      <div className="relative min-h-screen" style={{ backgroundColor: '#000000', color: '#ffffff' }}>
         <BackgroundImage />
         
         <Header />
