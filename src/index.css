@@ -122,7 +122,7 @@
 
 /* Estampa geométrica em todas as seções exceto hero */
 @layer base {
-  section:not(#hero)::before {
+  section:not([id="hero"])::before {
     content: '';
     position: absolute;
     top: 0;
@@ -131,15 +131,15 @@
     bottom: 0;
     background-image: url('https://i.imgur.com/cUWXwT9.png');
     background-repeat: repeat;
-    background-size: 200px 200px;
-    background-attachment: fixed;
-    opacity: 0.01;
+    background-size: 300px 300px;
+    opacity: 0.15;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
-  section:not(#hero) {
+  section:not([id="hero"]) {
     position: relative;
+    overflow: hidden;
   }
 }
 
