@@ -1,4 +1,7 @@
-import './ProcessCube.css';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import { Suspense } from 'react';
+import Cube3D from './Cube3D';
 
 interface ProcessCubeProps {
   stepNumber: string;
@@ -6,38 +9,15 @@ interface ProcessCubeProps {
 
 const ProcessCube = ({ stepNumber }: ProcessCubeProps) => {
   return (
-    <div className="process-cube-container">
-      <div className="process-cube">
-        {/* Face frontal */}
-        <div className="cube-face cube-face-front">
-          <span className="cube-number">{stepNumber}</span>
-        </div>
-        
-        {/* Face traseira */}
-        <div className="cube-face cube-face-back">
-          <span className="cube-number">{stepNumber}</span>
-        </div>
-        
-        {/* Face direita */}
-        <div className="cube-face cube-face-right">
-          <span className="cube-number">{stepNumber}</span>
-        </div>
-        
-        {/* Face esquerda */}
-        <div className="cube-face cube-face-left">
-          <span className="cube-number">{stepNumber}</span>
-        </div>
-        
-        {/* Face superior */}
-        <div className="cube-face cube-face-top">
-          <span className="cube-number">{stepNumber}</span>
-        </div>
-        
-        {/* Face inferior */}
-        <div className="cube-face cube-face-bottom">
-          <span className="cube-number">{stepNumber}</span>
-        </div>
-      </div>
+    <div className="w-[100px] h-[100px]">
+      <Canvas camera={{ position: [5, 5, 5] }}>
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <Cube3D number={stepNumber} />
+          <OrbitControls enableZoom={false} />
+        </Suspense>
+      </Canvas>
     </div>
   );
 };
