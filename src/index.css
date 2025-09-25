@@ -119,16 +119,16 @@
     @apply bg-white/30;
   }
 
-  /* Process Section - CARDS UNIFORMES E TODOS OS 5 */
-  .process-section-uniform {
+  /* Process Section - DESIGN BONITO E FUNCIONAL */
+  .process-section-beautiful {
     position: relative;
     width: 100%;
-    height: 600vh; /* 6x a altura para garantir que todos os cards apareçam */
+    min-height: 500vh; /* Espaço suficiente para todos os cards */
     overflow: hidden;
-    padding: 0;
+    background: linear-gradient(180deg, #000000 0%, #111111 50%, #000000 100%);
   }
 
-  .process-sticky-uniform {
+  .process-sticky-beautiful {
     position: sticky;
     top: 0;
     height: 100vh;
@@ -139,27 +139,26 @@
     overflow: hidden;
   }
 
-  .process-card-container-uniform {
+  .process-container-beautiful {
     position: relative;
     width: 100%;
+    max-width: 1400px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 2rem;
   }
 
-  /* Cards - UNIFORMES E FIXOS */
-  .process-card-uniform {
+  /* Cards - DESIGN BONITO E RESPONSIVO */
+  .process-card-beautiful {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* TAMANHOS FIXOS E UNIFORMES */
-    width: 650px;
-    height: 550px;
-    max-width: 90vw;
-    max-height: 80vh;
-    background: rgba(0, 0, 0, 0.6);
+    width: min(800px, 90vw);
+    height: min(600px, 70vh);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 2rem;
@@ -168,65 +167,58 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
     box-sizing: border-box;
     /* Estados iniciais */
     opacity: 0;
-    scale: 0.8;
-    filter: blur(10px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    scale: 0.9;
+    filter: blur(8px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
   }
 
   /* Estado ativo do card */
-  .process-card-uniform.active {
+  .process-card-beautiful.active {
     opacity: 1;
     scale: 1;
     filter: blur(0px);
     z-index: 10;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      0 0 40px rgba(255, 255, 255, 0.05);
   }
 
   /* Estado saindo do card */
-  .process-card-uniform.exiting {
+  .process-card-beautiful.exiting {
     opacity: 0;
-    scale: 1.1;
-    filter: blur(5px);
+    scale: 1.05;
+    filter: blur(4px);
     z-index: 5;
   }
 
-  .process-card-uniform::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
-  }
-
-  /* Header do card - UNIFORME */
-  .process-header-uniform {
+  /* Header do card */
+  .process-header-beautiful {
     flex-shrink: 0;
     margin-bottom: 2rem;
-    height: 120px; /* Altura fixa para uniformizar */
   }
 
-  .process-number-uniform {
+  .process-number-beautiful {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
-  .process-badge-uniform {
+  .process-badge-beautiful {
     width: 4rem;
     height: 4rem;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 1rem;
     display: flex;
@@ -237,174 +229,209 @@
     color: white;
     backdrop-filter: blur(10px);
     flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
-  .process-divider-uniform {
+  .process-divider-beautiful {
     flex: 1;
-    height: 1px;
+    height: 2px;
     background: linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.1),
       transparent
     );
+    border-radius: 1px;
   }
 
-  .process-title-uniform {
-    font-size: 2.5rem;
+  .process-title-beautiful {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 700;
     color: white;
     line-height: 1.2;
     margin-bottom: 1rem;
-    height: 60px; /* Altura fixa para uniformizar */
-    display: flex;
-    align-items: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   }
 
-  /* Conteúdo - UNIFORME */
-  .process-content-uniform {
+  /* Conteúdo do card */
+  .process-content-beautiful {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100% - 120px); /* Altura fixa */
+    gap: 2rem;
   }
 
-  .process-description-uniform {
-    font-size: 1.25rem;
+  .process-description-beautiful {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
-    height: 120px; /* Altura fixa para uniformizar */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   }
 
-  .process-image-uniform {
+  .process-image-beautiful {
     flex-shrink: 0;
-    height: 200px; /* Altura fixa para uniformizar */
+    height: 220px;
     border-radius: 1rem;
     overflow: hidden;
     position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .process-image-uniform img {
+  .process-image-beautiful img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
   }
 
-  .process-card-uniform.active .process-image-uniform img {
-    transform: scale(1.05);
+  .process-card-beautiful.active .process-image-beautiful img {
+    transform: scale(1.02);
   }
 
-  /* Gradient overlay */
-  .process-image-uniform::after {
+  /* Gradient overlay na imagem */
+  .process-image-beautiful::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 50%;
+    height: 60%;
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.8),
       transparent
     );
     pointer-events: none;
   }
 
-  /* Progress indicator */
-  .process-progress-uniform {
+  /* Progress indicator - DESIGN MELHORADO */
+  .process-progress-beautiful {
     position: fixed;
-    bottom: 3rem;
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     z-index: 100;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .process-progress-step-uniform {
-    width: 1rem;
-    height: 1rem;
+  .process-progress-step-beautiful {
+    width: 0.75rem;
+    height: 0.75rem;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    position: relative;
   }
 
-  .process-progress-step-uniform.active {
-    background: rgba(255, 255, 255, 0.9);
+  .process-progress-step-beautiful:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+  }
+
+  .process-progress-step-beautiful.active {
+    background: rgba(255, 255, 255, 0.95);
     border-color: rgba(255, 255, 255, 1);
-    transform: scale(1.2);
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   }
 
-  .process-progress-step-uniform.completed {
-    background: rgba(255, 255, 255, 0.6);
+  .process-progress-step-beautiful.completed {
+    background: rgba(255, 255, 255, 0.7);
     border-color: rgba(255, 255, 255, 0.8);
   }
 
-  /* Responsive */
+  /* Responsive - MOBILE FIRST */
   @media (max-width: 768px) {
-    .process-card-uniform {
-      width: 90vw;
-      height: 500px;
+    .process-section-beautiful {
+      min-height: 400vh;
+    }
+
+    .process-container-beautiful {
+      padding: 0 1rem;
+    }
+
+    .process-card-beautiful {
+      width: 95vw;
+      height: min(500px, 60vh);
       padding: 2rem;
     }
 
-    .process-header-uniform {
-      height: 100px;
-    }
-
-    .process-title-uniform {
-      font-size: 2rem;
-      height: 50px;
-    }
-
-    .process-description-uniform {
-      font-size: 1.1rem;
-      height: 100px;
-    }
-
-    .process-image-uniform {
-      height: 180px;
-    }
-
-    .process-badge-uniform {
+    .process-badge-beautiful {
       width: 3rem;
       height: 3rem;
       font-size: 1.25rem;
     }
+
+    .process-divider-beautiful {
+      height: 1px;
+    }
+
+    .process-image-beautiful {
+      height: 180px;
+    }
+
+    .process-progress-beautiful {
+      bottom: 1rem;
+      padding: 0.75rem 1rem;
+      gap: 0.5rem;
+    }
+
+    .process-progress-step-beautiful {
+      width: 0.6rem;
+      height: 0.6rem;
+    }
   }
 
   @media (max-width: 480px) {
-    .process-card-uniform {
-      width: 95vw;
-      height: 450px;
+    .process-section-beautiful {
+      min-height: 350vh;
+    }
+
+    .process-card-beautiful {
+      width: 98vw;
+      height: min(450px, 55vh);
       padding: 1.5rem;
     }
 
-    .process-header-uniform {
-      height: 80px;
-    }
-
-    .process-title-uniform {
-      font-size: 1.75rem;
-      height: 40px;
-    }
-
-    .process-description-uniform {
+    .process-badge-beautiful {
+      width: 2.5rem;
+      height: 2.5rem;
       font-size: 1rem;
-      height: 80px;
     }
 
-    .process-image-uniform {
+    .process-image-beautiful {
       height: 150px;
     }
+
+    .process-progress-beautiful {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+
+  /* Animações suaves */
+  @keyframes cardAppear {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.9) rotateX(10deg);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1) rotateX(0deg);
+    }
+  }
+
+  .process-card-beautiful.active {
+    animation: cardAppear 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 

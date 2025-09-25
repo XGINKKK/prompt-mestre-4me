@@ -64,7 +64,7 @@ const ProcessSection = () => {
         // Remove a flag de transição após a animação
         setTimeout(() => {
           setIsTransitioning(false);
-        }, 800);
+        }, 600);
       }
     };
 
@@ -99,15 +99,15 @@ const ProcessSection = () => {
     
     setTimeout(() => {
       setIsTransitioning(false);
-    }, 800);
+    }, 600);
   };
 
   return (
     <section 
       ref={containerRef} 
-      className="process-section-uniform"
+      className="process-section-beautiful"
     >
-      <div className="process-sticky-uniform">
+      <div className="process-sticky-beautiful">
         {/* Header fixo */}
         <div className="absolute top-0 left-0 w-full z-20 p-8">
           <div className="text-center">
@@ -121,9 +121,9 @@ const ProcessSection = () => {
         </div>
 
         {/* Container dos cards */}
-        <div className="process-card-container-uniform">
+        <div className="process-container-beautiful">
           {steps.map((step, index) => {
-            let cardClass = 'process-card-uniform';
+            let cardClass = 'process-card-beautiful';
             
             if (index === currentIndex) {
               cardClass += ' active';
@@ -137,27 +137,27 @@ const ProcessSection = () => {
                 className={cardClass}
               >
                 {/* Header com número e divisor */}
-                <div className="process-header-uniform">
-                  <div className="process-number-uniform">
-                    <div className="process-badge-uniform">
+                <div className="process-header-beautiful">
+                  <div className="process-number-beautiful">
+                    <div className="process-badge-beautiful">
                       {step.number}
                     </div>
-                    <div className="process-divider-uniform" />
+                    <div className="process-divider-beautiful" />
                   </div>
                   
-                  <h3 className="process-title-uniform">
+                  <h3 className="process-title-beautiful">
                     {step.title}
                   </h3>
                 </div>
 
                 {/* Conteúdo */}
-                <div className="process-content-uniform">
-                  <div className="process-description-uniform">
+                <div className="process-content-beautiful">
+                  <div className="process-description-beautiful">
                     <p>{step.description}</p>
                   </div>
 
                   {/* Imagem */}
-                  <div className="process-image-uniform">
+                  <div className="process-image-beautiful">
                     <img 
                       src={step.image} 
                       alt={step.title}
@@ -171,9 +171,9 @@ const ProcessSection = () => {
         </div>
 
         {/* Indicador de progresso */}
-        <div className="process-progress-uniform">
+        <div className="process-progress-beautiful">
           {steps.map((_, index) => {
-            let stepClass = 'process-progress-step-uniform';
+            let stepClass = 'process-progress-step-beautiful';
             
             if (index === currentIndex) {
               stepClass += ' active';
@@ -186,6 +186,7 @@ const ProcessSection = () => {
                 key={index}
                 className={stepClass}
                 onClick={() => handleProgressClick(index)}
+                title={`Etapa ${index + 1}`}
               />
             );
           })}
