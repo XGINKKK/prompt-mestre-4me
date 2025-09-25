@@ -1,29 +1,11 @@
 const BackgroundImage = () => {
   return (
-    // Background pattern com CSS inline para evitar conflitos no mobile
-    <div 
-      className="pointer-events-none fixed inset-0"
-      style={{
-        zIndex: -1,
-        opacity: 0.05, // Mesma opacidade do desktop original
-        background: '#000000', // Background preto sólido primeiro
-        transform: 'translateZ(0)',
-        willChange: 'opacity'
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          backgroundImage: 'url(https://i.imgur.com/gjBoffg.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          filter: 'invert(1)', // Inverte cores (preto vira branco)
-          opacity: 1,
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden'
-        }}
+    // Div que fica fixo, atrás de tudo, e quase transparente
+    <div className="pointer-events-none fixed inset-0 z-[-1] opacity-[0.05]">
+      <img
+        src="https://i.imgur.com/gjBoffg.png" // O link da estampa
+        alt=""
+        className="w-full h-full object-cover invert" // 'invert' transforma a estampa preta em branca
       />
     </div>
   );

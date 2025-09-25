@@ -36,11 +36,7 @@ const SectionCTA = ({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-white/10 border border-white/20 rounded-2xl"
-        style={{
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)'
-        }}
+        className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl"
       >
         <div className="text-center sm:text-left">
           <h4 className="text-lg font-semibold text-white mb-1">{title}</h4>

@@ -71,17 +71,8 @@
 
   /* Engineering theme utilities */
   .engineering-card {
-    @apply bg-black/95 border border-white/20 rounded-xl;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    @apply bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl;
     box-shadow: var(--shadow-card);
-  }
-  
-  /* Fallback para mobile sem suporte ao backdrop-filter */
-  @supports not (backdrop-filter: blur(20px)) {
-    .engineering-card {
-      background: rgba(0, 0, 0, 0.98);
-    }
   }
 
   .engineering-gradient {
@@ -97,34 +88,6 @@
 
   .smooth-transition {
     transition: var(--transition-smooth);
-  }
-
-  .bounce-transition {
-    transition: var(--transition-bounce);
-  }
-
-  /* Estampa do imgur apenas no mobile para todas as seções exceto hero */
-  @media (max-width: 768px) {
-    section:not(#hero):before,
-    footer:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('https://i.imgur.com/gjBoffg.png');
-      background-size: 60px 60px;
-      background-repeat: repeat;
-      opacity: 0.01;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    section:not(#hero),
-    footer {
-      position: relative;
-    }
   }
 
   .bounce-transition {

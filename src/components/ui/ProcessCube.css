@@ -20,22 +20,14 @@
   position: absolute;
   width: 80px;
   height: 80px;
-  background: rgba(255, 255, 255, 0.98);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
-
-/* Fallback para mobile sem suporte ao backdrop-filter */
-@supports not (backdrop-filter: blur(10px)) {
-  .cube-face {
-    background: rgba(255, 255, 255, 1);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-  }
 }
 
 .cube-logo {
