@@ -1,22 +1,46 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import { Link } from 'react-scroll';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Controla a escala do conteúdo (1 para 0.8)
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  
+  // Controla a opacidade (1 para 0)
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
+  
+  // Controla o movimento Y do conteúdo
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section 
+      ref={containerRef}
+      id="hero" 
+      className="relative h-[150vh]" // Altura maior para permitir o scroll
+    >
+      {/* Container sticky com os efeitos */}
+      <motion.div 
+        style={{ scale, opacity, y }}
+        className="sticky top-0 h-screen flex items-center justify-center overflow-hidden"
+      >
       {/* Background Image with Parallax */}
-      <div 
+      <motion.div 
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: 'url(https://i.imgur.com/eT1OuIN.jpeg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
         }}
       >
         <div className="absolute inset-0 bg-black/70" />
-      </div>
+      </motion.div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
@@ -127,6 +151,7 @@ const HeroSection = () => {
           </Link>
         </motion.div>
       </div>
+      </motion.div>
     </section>
   );
 };
