@@ -46,30 +46,33 @@ const ProcessSection = () => {
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calcula o progresso do scroll (0 a 1)
-      const scrollProgress = Math.max(0, Math.min(1, 
-        (windowHeight - rect.top) / (windowHeight + rect.height)
-      ));
+      // Verifica se a seção está visível na tela
+      const isInView = rect.top <= 0 && rect.bottom >= windowHeight;
       
-      // Calcula qual card deve estar ativo (0 a 4 para os 5 cards)
-      const totalSteps = steps.length;
-      const stepProgress = scrollProgress * totalSteps;
-      const newIndex = Math.floor(stepProgress);
-      const clampedIndex = Math.min(newIndex, totalSteps - 1);
-      
-      if (clampedIndex !== currentIndex && !isTransitioning) {
-        setIsTransitioning(true);
-        setCurrentIndex(clampedIndex);
+      if (isInView) {
+        // Calcula o progresso baseado na posição da seção
+        const scrollProgress = Math.abs(rect.top) / (rect.height - windowHeight);
+        const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
         
-        // Remove a flag de transição após a animação
-        setTimeout(() => {
-          setIsTransitioning(false);
-        }, 600);
+        // Calcula qual card deve estar ativo
+        const totalSteps = steps.length;
+        const stepProgress = clampedProgress * totalSteps;
+        const newIndex = Math.floor(stepProgress);
+        const clampedIndex = Math.min(newIndex, totalSteps - 1);
+        
+        if (clampedIndex !== currentIndex && !isTransitioning) {
+          setIsTransitioning(true);
+          setCurrentIndex(clampedIndex);
+          
+          setTimeout(() => {
+            setIsTransitioning(false);
+          }, 600);
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Chama uma vez para definir o estado inicial
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -82,19 +85,10 @@ const ProcessSection = () => {
     setIsTransitioning(true);
     setCurrentIndex(index);
     
-    // Scroll para a posição correspondente
+    // Scroll para mostrar a seção se não estiver visível
     const container = containerRef.current;
     if (container) {
-      const rect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const sectionHeight = container.offsetHeight;
-      const targetProgress = index / (steps.length - 1);
-      const targetScroll = rect.top + (targetProgress * sectionHeight) - windowHeight;
-      
-      window.scrollTo({
-        top: window.scrollY + targetScroll,
-        behavior: 'smooth'
-      });
+      container.scrollIntoView({ behavior: 'smooth' });
     }
     
     setTimeout(() => {
@@ -105,9 +99,9 @@ const ProcessSection = () => {
   return (
     <section 
       ref={containerRef} 
-      className="process-section-beautiful"
+      className="process-section-fixed"
     >
-      <div className="process-sticky-beautiful">
+      <div className="process-sticky-fixed">
         {/* Header fixo */}
         <div className="absolute top-0 left-0 w-full z-20 p-8">
           <div className="text-center">
@@ -121,9 +115,9 @@ const ProcessSection = () => {
         </div>
 
         {/* Container dos cards */}
-        <div className="process-container-beautiful">
+        <div className="process-container-fixed">
           {steps.map((step, index) => {
-            let cardClass = 'process-card-beautiful';
+            let cardClass = 'process-card-fixed';
             
             if (index === currentIndex) {
               cardClass += ' active';
@@ -137,27 +131,27 @@ const ProcessSection = () => {
                 className={cardClass}
               >
                 {/* Header com número e divisor */}
-                <div className="process-header-beautiful">
-                  <div className="process-number-beautiful">
-                    <div className="process-badge-beautiful">
+                <div className="process-header-fixed">
+                  <div className="process-number-fixed">
+                    <div className="process-badge-fixed">
                       {step.number}
                     </div>
-                    <div className="process-divider-beautiful" />
+                    <div className="process-divider-fixed" />
                   </div>
                   
-                  <h3 className="process-title-beautiful">
+                  <h3 className="process-title-fixed">
                     {step.title}
                   </h3>
                 </div>
 
                 {/* Conteúdo */}
-                <div className="process-content-beautiful">
-                  <div className="process-description-beautiful">
+                <div className="process-content-fixed">
+                  <div className="process-description-fixed">
                     <p>{step.description}</p>
                   </div>
 
                   {/* Imagem */}
-                  <div className="process-image-beautiful">
+                  <div className="process-image-fixed">
                     <img 
                       src={step.image} 
                       alt={step.title}
@@ -171,9 +165,9 @@ const ProcessSection = () => {
         </div>
 
         {/* Indicador de progresso */}
-        <div className="process-progress-beautiful">
+        <div className="process-progress-fixed">
           {steps.map((_, index) => {
-            let stepClass = 'process-progress-step-beautiful';
+            let stepClass = 'process-progress-step-fixed';
             
             if (index === currentIndex) {
               stepClass += ' active';
