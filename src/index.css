@@ -73,7 +73,43 @@
   .engineering-card {
     @apply bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl;
     box-shadow: var(--shadow-card);
-  }
+}
+
+/* ===== 3D CUBE EFFECTS ===== */
+.transform-gpu {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.cube-front {
+  transform: rotateY(12deg) rotateX(-8deg);
+}
+
+.cube-side {
+  transform: rotateY(12deg) rotateX(-8deg);
+}
+
+.cube-shadow {
+  transform: rotateY(12deg) rotateX(-8deg);
+}
+
+/* Hover effects no cubo */
+.group:hover .cube-front {
+  transform: rotateY(18deg) rotateX(-12deg) scale(1.05);
+}
+
+.group:hover .cube-side {
+  transform: rotateY(18deg) rotateX(-12deg) scale(1.05);
+}
+
+.group:hover .cube-shadow {
+  transform: rotateY(18deg) rotateX(-12deg) scale(1.05);
+}
+
+/* Transições suaves entre etapas */
+.step-transition {
+  transition: opacity 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
 
   .engineering-gradient {
     background: var(--gradient-primary);
