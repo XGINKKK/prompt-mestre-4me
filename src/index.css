@@ -73,43 +73,7 @@
   .engineering-card {
     @apply bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl;
     box-shadow: var(--shadow-card);
-}
-
-/* ===== 3D CUBE EFFECTS ===== */
-.transform-gpu {
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
-.cube-front {
-  transform: rotateY(12deg) rotateX(-8deg);
-}
-
-.cube-side {
-  transform: rotateY(12deg) rotateX(-8deg);
-}
-
-.cube-shadow {
-  transform: rotateY(12deg) rotateX(-8deg);
-}
-
-/* Hover effects no cubo */
-.group:hover .cube-front {
-  transform: rotateY(18deg) rotateX(-12deg) scale(1.05);
-}
-
-.group:hover .cube-side {
-  transform: rotateY(18deg) rotateX(-12deg) scale(1.05);
-}
-
-.group:hover .cube-shadow {
-  transform: rotateY(18deg) rotateX(-12deg) scale(1.05);
-}
-
-/* Transições suaves entre etapas */
-.step-transition {
-  transition: opacity 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
-}
+  }
 
   .engineering-gradient {
     background: var(--gradient-primary);
@@ -154,114 +118,88 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-white/30;
   }
-}
 
-/* Estampa geométrica em todas as seções exceto hero */
-@layer base {
-  section:not([id="hero"])::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('https://i.imgur.com/cUWXwT9.png');
-    background-repeat: repeat;
-    background-size: 300px 300px;
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  section:not([id="hero"]) {
-    position: relative;
-    overflow: hidden;
-  }
-}
-
-/* Solução 1: Método Flexbox Simples e Direto para Scroll Horizontal */
-@layer utilities {
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* CSS que REALMENTE funciona */
-  .horizontal-scroll-wrapper {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .horizontal-scroll-container {
-    display: flex;
-    width: max-content; /* CRUCIAL: permite que o container se expanda */
-    height: 100vh;
+  /* Process Section Horizontal Scroll */
+  .process-horizontal-container {
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    padding-bottom: 1rem;
+  }
+
+  .process-horizontal-container::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .process-horizontal-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .process-horizontal-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+
+  .process-horizontal-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .process-horizontal-scroll {
+    display: flex;
+    gap: 2rem;
+    min-width: max-content;
+    padding: 0 1rem;
+  }
+
+  .process-step-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 400px;
+    max-width: 500px;
+    flex-shrink: 0;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .process-step-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .process-step-content {
+    flex: 1;
+  }
+
+  .process-step-image {
+    flex-shrink: 0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .process-step-card {
+      min-width: 320px;
+      max-width: 350px;
+      padding: 1rem;
+    }
     
-    /* Remover scrollbar */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    .process-horizontal-scroll {
+      gap: 1.5rem;
+      padding: 0 0.5rem;
+    }
   }
 
-  .horizontal-scroll-container::-webkit-scrollbar {
-    display: none;
-  }
-
-  .processo-slide {
-    flex: 0 0 100vw; /* NÃO usar flex: none */
-    height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 5%;
-    box-sizing: border-box;
-  }
-}
-
-/* Swiper.js Customization para Processos */
-@layer utilities {
-  .processos-swiper-wrapper {
-    height: 100vh;
-    width: 100%;
-  }
-  
-  .processos-swiper {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .processos-swiper .swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Customizar paginação */
-  .processos-swiper .swiper-pagination {
-    bottom: 20px !important;
-  }
-  
-  .processos-swiper .swiper-pagination-bullet {
-    background: rgba(255, 255, 255, 0.3) !important;
-    width: 12px !important;
-    height: 12px !important;
-    margin: 0 6px !important;
-    transition: all 0.3s ease !important;
-  }
-  
-  .processos-swiper .swiper-pagination-bullet-active {
-    background: white !important;
-    transform: scale(1.2) !important;
+  @media (max-width: 480px) {
+    .process-step-card {
+      min-width: 280px;
+      max-width: 300px;
+    }
   }
 }
 
