@@ -26,12 +26,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  color: #000000;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+.cube-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%);
 }
 
 .front { 
@@ -82,7 +85,11 @@
   .cube-face {
     width: 50px;
     height: 50px;
-    font-size: 16px;
+  }
+
+  .cube-logo {
+    width: 32px;
+    height: 32px;
   }
 
   .front { 
