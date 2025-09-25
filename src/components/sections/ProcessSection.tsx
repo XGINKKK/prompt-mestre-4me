@@ -39,41 +39,43 @@ const ProcessSection = () => {
   ];
 
   useEffect(() => {
-    const handleWheel = (e) => {
+    const handleScroll = () => {
       if (!containerRef.current) return;
 
       const container = containerRef.current;
       const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
       
-      // Verifica se a seção está visível e o scroll está sobre ela
-      const isInSection = rect.top <= 100 && rect.bottom >= 100;
+      // Verifica se a seção está visível na tela
+      const isInView = rect.top <= 0 && rect.bottom >= windowHeight;
       
-      if (isInSection && !isTransitioning) {
-        e.preventDefault(); // Bloqueia o scroll vertical
-        e.stopPropagation();
+      if (isInView) {
+        // Calcula o progresso baseado na posição da seção
+        const scrollProgress = Math.abs(rect.top) / (rect.height - windowHeight);
+        const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
         
-        setIsTransitioning(true);
+        // Calcula qual card deve estar ativo
+        const totalSteps = steps.length;
+        const stepProgress = clampedProgress * totalSteps;
+        const newIndex = Math.floor(stepProgress);
+        const clampedIndex = Math.min(newIndex, totalSteps - 1);
         
-        if (e.deltaY > 0 && currentIndex < steps.length - 1) {
-          // Scroll para baixo - próximo step
-          setCurrentIndex(prev => prev + 1);
-        } else if (e.deltaY < 0 && currentIndex > 0) {
-          // Scroll para cima - step anterior
-          setCurrentIndex(prev => prev - 1);
+        if (clampedIndex !== currentIndex && !isTransitioning) {
+          setIsTransitioning(true);
+          setCurrentIndex(clampedIndex);
+          
+          setTimeout(() => {
+            setIsTransitioning(false);
+          }, 600);
         }
-        
-        // Reset após a transição
-        setTimeout(() => {
-          setIsTransitioning(false);
-        }, 800);
       }
     };
 
-    // Adiciona o event listener para toda a página
-    document.addEventListener('wheel', handleWheel, { passive: false });
-    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
     return () => {
-      document.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [currentIndex, isTransitioning, steps.length]);
 
@@ -97,12 +99,14 @@ const ProcessSection = () => {
   return (
     <section 
       ref={containerRef} 
-      className="process-section-fixed"
+      className="relative h-[400vh] bg-black"
     >
-      <div className="process-sticky-fixed">
-        {/* Header fixo */}
-        <div className="absolute top-0 left-0 w-full z-20 p-8">
-          <div className="text-center">
+      {/* Container sticky */}
+      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+        <div className="w-full relative">
+          
+          {/* Header fixo */}
+          <div className="absolute top-16 left-0 right-0 text-center z-20">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Nosso <span className="engineering-text-gradient">Processo</span>
             </h2>
@@ -110,78 +114,98 @@ const ProcessSection = () => {
               Da concepção à execução, um fluxo de trabalho preciso e transparente que garante excelência em cada etapa.
             </p>
           </div>
-        </div>
 
-        {/* Container dos cards */}
-        <div className="process-container-fixed">
-          {steps.map((step, index) => {
-            let cardClass = 'process-card-fixed';
-            
-            if (index === currentIndex) {
-              cardClass += ' active';
-            } else if (index < currentIndex) {
-              cardClass += ' exiting';
-            }
-            
-            return (
-              <div 
-                key={step.number}
-                className={cardClass}
-              >
-                {/* Header com número e divisor */}
-                <div className="process-header-fixed">
-                  <div className="process-number-fixed">
-                    <div className="process-badge-fixed">
-                      {step.number}
+          {/* Container dos slides horizontais */}
+          <div className="relative h-screen flex items-center justify-center pt-32">
+            <div 
+              className="flex transition-transform duration-700 ease-out"
+              style={{ 
+                transform: `translateX(-${currentIndex * 100}%)`,
+                width: `${steps.length * 100}%`
+              }}
+            >
+              {steps.map((step, index) => (
+                <div
+                  key={step.number}
+                  className="w-full flex-shrink-0 px-8"
+                  style={{ width: `${100 / steps.length}%` }}
+                >
+                  <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center h-full">
+                    
+                    {/* Lado esquerdo - Card com número */}
+                    <div className="flex justify-center lg:justify-end">
+                      <div className="relative">
+                        {/* Card principal */}
+                        <div className="w-80 h-80 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl border border-white/20 rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl">
+                          
+                          {/* Efeito de profundidade */}
+                          <div className="absolute inset-4 bg-gradient-to-br from-white/20 via-transparent to-black/20 rounded-2xl"></div>
+                          
+                          {/* Número central */}
+                          <div className="relative z-10">
+                            <span className="text-8xl font-black text-white drop-shadow-2xl">
+                              {step.number}
+                            </span>
+                          </div>
+                          
+                          {/* Reflexo superior */}
+                          <div className="absolute top-6 left-6 w-16 h-16 bg-white/30 rounded-xl backdrop-blur-sm"></div>
+                          
+                          {/* Sombra inferior */}
+                          <div className="absolute -bottom-8 -left-4 -right-4 h-12 bg-black/40 rounded-full blur-2xl"></div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="process-divider-fixed" />
+                    
+                    {/* Lado direito - Conteúdo */}
+                    <div className="text-white space-y-6 lg:pl-8">
+                      <div className="text-white/60 font-semibold text-lg tracking-wider uppercase">
+                        Etapa {step.number}
+                      </div>
+                      
+                      <h3 className="text-4xl lg:text-5xl font-bold leading-tight text-white">
+                        {step.title}
+                      </h3>
+                      
+                      <p className="text-white/80 text-lg leading-relaxed max-w-2xl">
+                        {step.description}
+                      </p>
+                      
+                      {/* Imagem em formato card */}
+                      <div className="relative w-full max-w-md h-48 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
+                        <img 
+                          src={step.image} 
+                          alt={step.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover"
+                        />
+                        {/* Overlay sutil */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                      </div>
+                    </div>
+                    
                   </div>
-                  
-                  <h3 className="process-title-fixed">
-                    {step.title}
-                  </h3>
                 </div>
-
-                {/* Conteúdo */}
-                <div className="process-content-fixed">
-                  <div className="process-description-fixed">
-                    <p>{step.description}</p>
-                  </div>
-
-                  {/* Imagem */}
-                  <div className="process-image-fixed">
-                    <img 
-                      src={step.image} 
-                      alt={step.title}
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Indicador de progresso */}
-        <div className="process-progress-fixed">
-          {steps.map((_, index) => {
-            let stepClass = 'process-progress-step-fixed';
-            
-            if (index === currentIndex) {
-              stepClass += ' active';
-            } else if (index < currentIndex) {
-              stepClass += ' completed';
-            }
-            
-            return (
-              <div 
+              ))}
+            </div>
+          </div>
+          
+          {/* Indicadores de progresso */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-4 z-20 bg-black/40 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
+            {steps.map((_, index) => (
+              <button
                 key={index}
-                className={stepClass}
                 onClick={() => handleProgressClick(index)}
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-white w-8 shadow-lg' 
+                    : 'bg-white/30 hover:bg-white/50'
+                }`}
                 title={`Etapa ${index + 1}`}
               />
-            );
-          })}
+            ))}
+          </div>
+          
         </div>
       </div>
     </section>
