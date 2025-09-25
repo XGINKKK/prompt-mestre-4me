@@ -140,6 +140,7 @@
   section:not([id="hero"]) {
     position: relative;
     overflow: hidden;
+  }
 }
 
 /* Solução 1: Método Flexbox Simples e Direto para Scroll Horizontal */
@@ -190,6 +191,42 @@
     box-sizing: border-box;
   }
 }
+
+/* Swiper.js Customization para Processos */
+@layer utilities {
+  .processos-swiper-wrapper {
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .processos-swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .processos-swiper .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Customizar paginação */
+  .processos-swiper .swiper-pagination {
+    bottom: 20px !important;
+  }
+  
+  .processos-swiper .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.3) !important;
+    width: 12px !important;
+    height: 12px !important;
+    margin: 0 6px !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .processos-swiper .swiper-pagination-bullet-active {
+    background: white !important;
+    transform: scale(1.2) !important;
+  }
 }
 
 @layer base {
