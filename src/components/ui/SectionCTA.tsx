@@ -54,15 +54,17 @@ const SectionCTA = ({
             <ArrowRight size={16} />
           </motion.button>
           
-          <motion.button
-            onClick={secondaryAction.onClick}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-2 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-all duration-300 flex items-center gap-2"
-          >
-            <MessageCircle size={16} />
-            {secondaryAction.text}
-          </motion.button>
+          {secondaryAction && (
+            <motion.button
+              onClick={secondaryAction.onClick}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-2 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-all duration-300 flex items-center gap-2"
+            >
+              <MessageCircle size={16} />
+              {secondaryAction.text}
+            </motion.button>
+          )}
         </div>
       </motion.div>
     );

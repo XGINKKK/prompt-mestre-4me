@@ -1,5 +1,5 @@
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import { Button } from '@/components/ui/button';
+import SectionCTA from '@/components/ui/SectionCTA';
 
 const ContactSection = () => {
   const contactInfo = [
@@ -51,28 +51,17 @@ const ContactSection = () => {
                 </div>
               ))}
 
-              {/* CTA Buttons */}
-              <div className="space-y-4">
-                <a
-                  href="https://wa.me/5547997957480?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <Button className="w-full bg-white text-black hover:bg-accent hover:text-white transition-all duration-300 font-bold py-4">
-                    WhatsApp - Resposta Rápida
-                  </Button>
-                </a>
-                
-                <a
-                  href="mailto:contato@4meengenharia.com"
-                  className="block"
-                >
-                  <Button variant="outline" className="w-full border-white text-white hover:bg-white hover:text-black transition-all duration-300 font-bold py-4">
-                    Enviar Email
-                  </Button>
-                </a>
-              </div>
+              {/* CTA */}
+              <SectionCTA 
+                variant="minimal"
+                title="Pronto para começar?"
+                subtitle="Entre em contato e vamos transformar sua ideia em realidade"
+                primaryAction={{
+                  text: "Solicitar Orçamento",
+                  onClick: () => window.open('https://wa.me/5547997957480?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento.', '_blank')
+                }}
+                secondaryAction={undefined}
+              />
             </div>
           </ScrollReveal>
 
