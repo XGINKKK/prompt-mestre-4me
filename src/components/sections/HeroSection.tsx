@@ -58,9 +58,9 @@ const HeroSection = () => {
             className="mb-8"
           >
             <img 
-              src="https://i.imgur.com/H0q0jWu.png" 
-              alt="4ME Icon" 
-              className="w-16 h-16 mx-auto mb-6"
+              src="/src/assets/4me-logo.png" 
+              alt="4ME Engenharia" 
+              className="w-48 h-48 mx-auto mb-6 object-contain"
             />
           </motion.div>
 

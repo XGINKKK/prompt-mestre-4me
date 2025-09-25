@@ -24,7 +24,7 @@ const MetricsSection = () => {
   ];
 
   return (
-    <section className="relative z-10 py-20 bg-background">
+    <section className="relative z-[5] py-20 bg-background">
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">

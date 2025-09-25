@@ -2,7 +2,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 
 const AboutSection = () => {
   return (
-    <section id="about" className="relative z-10 py-20 bg-background">
+    <section id="about" className="relative z-[5] py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -39,11 +39,11 @@ const AboutSection = () => {
           {/* Image */}
           <ScrollReveal delay={0.2}>
             <div className="relative">
-              <div className="engineering-card p-2 animate-glow">
+              <div className="engineering-card p-8 animate-glow flex items-center justify-center">
                 <img 
-                  src="https://i.imgur.com/VXSeGGm.jpeg" 
-                  alt="4ME Engenharia - Sobre Nós" 
-                  className="w-full h-[500px] object-cover rounded-lg"
+                  src="/src/assets/4me-logo.png" 
+                  alt="4ME Engenharia - Logo" 
+                  className="w-full max-w-md h-auto object-contain"
                 />
               </div>
               
