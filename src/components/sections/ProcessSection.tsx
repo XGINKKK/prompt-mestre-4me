@@ -45,7 +45,7 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section ref={containerRef} className="relative z-10 py-20 bg-background">
+    <section ref={containerRef} className="relative z-10 py-20 bg-background process-section-wrapper">
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
@@ -58,7 +58,7 @@ const ProcessSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Container com scroll horizontal */}
+        {/* Container com scroll horizontal OBRIGATÓRIO - sem scroll vertical */}
         <div className="process-horizontal-container">
           <div className="process-horizontal-scroll">
             {steps.map((step, index) => (

@@ -119,19 +119,25 @@
     @apply bg-white/30;
   }
 
-  /* Process Section Horizontal Scroll */
+  /* Process Section Horizontal Scroll - VERSÃO CORRIGIDA */
   .process-horizontal-container {
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: hidden !important;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
     padding-bottom: 1rem;
+    max-height: 100vh;
+    height: auto;
+    /* Força apenas scroll horizontal */
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: auto;
   }
 
   .process-horizontal-container::-webkit-scrollbar {
     height: 8px;
+    width: 0; /* Remove scrollbar vertical */
   }
 
   .process-horizontal-container::-webkit-scrollbar-track {
@@ -152,6 +158,9 @@
     gap: 2rem;
     min-width: max-content;
     padding: 0 1rem;
+    height: 100%;
+    /* Previne que os filhos causem scroll vertical */
+    align-items: stretch;
   }
 
   .process-step-card {
@@ -166,6 +175,9 @@
     border-radius: 1rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    height: fit-content;
+    max-height: 80vh;
+    overflow: hidden;
   }
 
   .process-step-card:hover {
@@ -175,10 +187,18 @@
 
   .process-step-content {
     flex: 1;
+    overflow: hidden;
   }
 
   .process-step-image {
     flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  /* Força o container pai a não permitir scroll vertical */
+  .process-section-wrapper {
+    overflow-y: hidden !important;
+    max-height: 100vh;
   }
 
   /* Responsive adjustments */
@@ -187,6 +207,7 @@
       min-width: 320px;
       max-width: 350px;
       padding: 1rem;
+      max-height: 70vh;
     }
     
     .process-horizontal-scroll {
@@ -199,6 +220,7 @@
     .process-step-card {
       min-width: 280px;
       max-width: 300px;
+      max-height: 60vh;
     }
   }
 }
