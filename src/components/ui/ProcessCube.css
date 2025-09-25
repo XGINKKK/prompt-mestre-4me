@@ -1,8 +1,8 @@
 .cube-dynasty {
-  perspective: 800px;
+  perspective: 1000px;
   perspective-origin: center center;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,16 +10,16 @@
 
 .cube-3d {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   transform-style: preserve-3d;
   animation: dynastyRotate 12s infinite linear;
 }
 
 .cube-face {
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
@@ -31,34 +31,34 @@
 }
 
 .cube-logo {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   filter: brightness(0) saturate(100%);
 }
 
 .front { 
-  transform: rotateY(0deg) translateZ(30px); 
+  transform: rotateY(0deg) translateZ(40px); 
 }
 
 .back { 
-  transform: rotateY(180deg) translateZ(30px); 
+  transform: rotateY(180deg) translateZ(40px); 
 }
 
 .right { 
-  transform: rotateY(90deg) translateZ(30px); 
+  transform: rotateY(90deg) translateZ(40px); 
 }
 
 .left { 
-  transform: rotateY(-90deg) translateZ(30px); 
+  transform: rotateY(-90deg) translateZ(40px); 
 }
 
 .top { 
-  transform: rotateX(90deg) translateZ(30px); 
+  transform: rotateX(90deg) translateZ(40px); 
 }
 
 .bottom { 
-  transform: rotateX(-90deg) translateZ(30px); 
+  transform: rotateX(-90deg) translateZ(40px); 
 }
 
 @keyframes dynastyRotate {
@@ -70,49 +70,49 @@
   }
 }
 
-/* Responsive: 50px em mobile */
+/* Responsive: 65px em mobile */
 @media (max-width: 768px) {
   .cube-dynasty {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
   }
 
   .cube-3d {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
   }
 
   .cube-face {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
   }
 
   .cube-logo {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
   }
 
   .front { 
-    transform: rotateY(0deg) translateZ(25px); 
+    transform: rotateY(0deg) translateZ(32.5px); 
   }
 
   .back { 
-    transform: rotateY(180deg) translateZ(25px); 
+    transform: rotateY(180deg) translateZ(32.5px); 
   }
 
   .right { 
-    transform: rotateY(90deg) translateZ(25px); 
+    transform: rotateY(90deg) translateZ(32.5px); 
   }
 
   .left { 
-    transform: rotateY(-90deg) translateZ(25px); 
+    transform: rotateY(-90deg) translateZ(32.5px); 
   }
 
   .top { 
-    transform: rotateX(90deg) translateZ(25px); 
+    transform: rotateX(90deg) translateZ(32.5px); 
   }
 
   .bottom { 
-    transform: rotateX(-90deg) translateZ(25px); 
+    transform: rotateX(-90deg) translateZ(32.5px); 
   }
 }
