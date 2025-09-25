@@ -142,7 +142,7 @@
     overflow: hidden;
 }
 
-/* Scroll lateral para seção de processos */
+/* Solução 1: Método Flexbox Simples e Direto para Scroll Horizontal */
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -153,35 +153,41 @@
     display: none;
   }
   
-  /* CSS específico para scroll horizontal dos processos */
-  .processos-section {
-    height: 100vh !important;
-    overflow: hidden !important;
+  /* CSS que REALMENTE funciona */
+  .horizontal-scroll-wrapper {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
   }
-  
-  .processos-scroll-container {
-    overflow-x: scroll !important;
-    overflow-y: hidden !important;
-    scroll-snap-type: x mandatory !important;
-    display: flex !important;
-    flex-direction: row !important;
-    height: 100vh !important;
-    width: 100% !important;
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
+
+  .horizontal-scroll-container {
+    display: flex;
+    width: max-content; /* CRUCIAL: permite que o container se expanda */
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    
+    /* Remover scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  
-  .processos-scroll-container::-webkit-scrollbar {
-    display: none !important;
+
+  .horizontal-scroll-container::-webkit-scrollbar {
+    display: none;
   }
-  
-  .processo-card {
-    flex: none !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    display: flex !important;
-    scroll-snap-align: start !important;
-    flex-shrink: 0 !important;
+
+  .processo-slide {
+    flex: 0 0 100vw; /* NÃO usar flex: none */
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5%;
+    box-sizing: border-box;
   }
 }
 }
