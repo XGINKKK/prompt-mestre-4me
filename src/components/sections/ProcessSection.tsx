@@ -102,14 +102,14 @@ const ProcessSection = () => {
       className="relative h-[400vh] bg-black"
     >
       {/* Container sticky */}
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-8">
         
-        {/* Header fixo */}
-        <div className="text-center mb-16 px-8">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+        {/* Header com espaçamento adequado */}
+        <div className="text-center mb-8 md:mb-16 px-4 md:px-8 pt-4 md:pt-8">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-4 md:mb-6">
             Nosso <span className="engineering-text-gradient">Processo</span>
           </h2>
-          <p className="text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed">
             Da concepção à execução, um fluxo de trabalho preciso e transparente que garante excelência em cada etapa.
           </p>
         </div>
@@ -125,61 +125,54 @@ const ProcessSection = () => {
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className="w-full flex-shrink-0 px-16"
+                className="w-full flex-shrink-0 px-4 md:px-8 lg:px-16"
                 style={{ minWidth: '100%' }}
               >
-                <div className="max-w-7xl mx-auto">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div className="max-w-6xl mx-auto">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
                     
-                    {/* Lado esquerdo - Card com número uniformizado */}
-                    <div className="flex justify-center lg:justify-end">
+                    {/* Lado esquerdo - Cubo 3D branco melhorado */}
+                    <div className="flex justify-center lg:justify-end order-2 lg:order-1">
                       <div className="relative group">
-                        {/* Card principal com tamanho fixo */}
-                        <div className="w-96 h-96 bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-black/90 backdrop-blur-xl border border-white/10 rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl hover:shadow-white/10 transition-all duration-500">
+                        {/* Cubo 3D branco com sombras */}
+                        <div className="w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-white rounded-3xl flex items-center justify-center relative overflow-hidden transition-all duration-500 hover:scale-105">
                           
-                          {/* Background pattern sutil */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20"></div>
+                          {/* Sombras para efeito 3D */}
+                          <div className="absolute -bottom-6 -right-6 w-full h-full bg-black/20 rounded-3xl blur-xl"></div>
+                          <div className="absolute -bottom-3 -right-3 w-full h-full bg-black/10 rounded-3xl"></div>
                           
-                          {/* Número central - tamanho fixo */}
+                          {/* Gradiente sutil no cubo */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl"></div>
+                          
+                          {/* Reflexo superior */}
+                          <div className="absolute top-6 left-6 w-16 h-16 bg-white/80 rounded-2xl shadow-inner"></div>
+                          
+                          {/* Número central com fonte menos bold */}
                           <div className="relative z-10 text-center">
-                            <span className="text-9xl font-black text-white drop-shadow-2xl leading-none">
+                            <span className="text-7xl md:text-8xl lg:text-9xl font-semibold text-gray-800 leading-none">
                               {step.number}
                             </span>
                           </div>
                           
-                          {/* Reflexo superior */}
-                          <div className="absolute top-8 left-8 w-20 h-20 bg-white/20 rounded-2xl backdrop-blur-sm"></div>
-                          
-                          {/* Glow effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          {/* Sombra interna sutil */}
+                          <div className="absolute inset-0 rounded-3xl shadow-inner bg-gradient-to-br from-transparent via-transparent to-black/5"></div>
                         </div>
                       </div>
                     </div>
                     
-                    {/* Lado direito - Conteúdo uniformizado */}
-                    <div className="text-white space-y-6 lg:pl-12">
-                      <div className="text-white/60 font-semibold text-lg tracking-wider uppercase">
+                    {/* Lado direito - Conteúdo limpo */}
+                    <div className="text-white space-y-4 md:space-y-6 lg:pl-12 order-1 lg:order-2 text-center lg:text-left">
+                      <div className="text-white/60 font-semibold text-base md:text-lg tracking-wider uppercase">
                         Etapa {step.number}
                       </div>
                       
-                      <h3 className="text-4xl lg:text-5xl font-bold leading-tight text-white min-h-[120px] flex items-center">
+                      <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight text-white">
                         {step.title}
                       </h3>
                       
-                      <p className="text-white/80 text-xl leading-relaxed max-w-2xl min-h-[120px]">
+                      <p className="text-white/80 text-base md:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0">
                         {step.description}
                       </p>
-                      
-                      {/* Imagem uniformizada */}
-                      <div className="relative w-full max-w-lg h-56 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-                        <img 
-                          src={step.image} 
-                          alt={step.title}
-                          loading="lazy"
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
-                      </div>
                     </div>
                     
                   </div>
@@ -190,15 +183,15 @@ const ProcessSection = () => {
         </div>
         
         {/* Indicadores de progresso */}
-        <div className="flex justify-center mt-12 pb-8">
-          <div className="flex space-x-4 bg-black/40 backdrop-blur-sm px-8 py-4 rounded-full border border-white/10">
+        <div className="flex justify-center mt-8 md:mt-12 pb-4 md:pb-8">
+          <div className="flex space-x-3 md:space-x-4 bg-black/40 backdrop-blur-sm px-6 md:px-8 py-3 md:py-4 rounded-full border border-white/10">
             {steps.map((_, index) => (
               <button
                 key={index}
                 onClick={() => handleProgressClick(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 ${
                   index === currentIndex 
-                    ? 'bg-white w-10 shadow-lg' 
+                    ? 'bg-white w-8 md:w-10 shadow-lg' 
                     : 'bg-white/30 hover:bg-white/50'
                 }`}
                 title={`Etapa ${index + 1}`}
