@@ -60,7 +60,7 @@ const HeroSection = () => {
             <img 
               src="https://i.imgur.com/H0q0jWu.png" 
               alt="4ME Icon" 
-              className="w-16 h-16 mx-auto mb-6"
+              className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-6"
             />
           </motion.div>
 

@@ -47,12 +47,13 @@ const AboutSection = () => {
                 />
               </div>
               
-              {/* Floating Badge */}
-              <div className="absolute -bottom-6 -left-6 engineering-card p-6">
-                <div className="text-center">
-                  <div className="text-3xl font-black text-white mb-2">4ME</div>
-                  <div className="text-sm text-accent">Engenharia</div>
-                </div>
+              {/* Floating Logo */}
+              <div className="absolute -bottom-6 -left-6 engineering-card p-4">
+                <img 
+                  src="https://i.imgur.com/tD8iFcw.png" 
+                  alt="4ME Engenharia Logo" 
+                  className="w-20 h-20 object-contain"
+                />
               </div>
             </div>
           </ScrollReveal>
