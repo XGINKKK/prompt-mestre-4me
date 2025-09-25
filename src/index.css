@@ -116,7 +116,6 @@
       background-image: url('https://i.imgur.com/gjBoffg.png');
       background-size: 60px 60px;
       background-repeat: repeat;
-      opacity: 0.05;
       pointer-events: none;
       z-index: -1;
     }
