@@ -43,7 +43,7 @@ const Header = () => {
             <img 
               src="https://i.imgur.com/DUmbFoD.png" 
               alt="4ME Engenharia" 
-              className="h-8 w-auto"
+              className="h-12 w-auto"
             />
           </Link>
 
