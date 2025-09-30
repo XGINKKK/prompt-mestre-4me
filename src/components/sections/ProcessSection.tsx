@@ -9,32 +9,32 @@ const ProcessSection = () => {
   const steps = [
     {
       number: '01',
-      title: 'Briefing e levantamento',
-      description: 'Requisitos detalhados, visitas técnicas e análise de viabilidade estrutural para garantir a execução perfeita do projeto.',
+      title: 'Briefing do projeto',
+      description: 'Reuniões iniciais para compreender as necessidades do cliente, objetivos do projeto e requisitos técnicos fundamentais.',
       image: 'https://i.imgur.com/WBPCAx2.png'
     },
     {
       number: '02',
-      title: 'Projeto estrutural e fundações',
-      description: 'Dimensionamento preciso e detalhamento técnico seguindo rigorosamente as normas NBR 6118/6122 com cálculos estruturais avançados.',
+      title: 'Lançamento estrutural',
+      description: 'Desenvolvimento da concepção estrutural com definição de sistemas construtivos, dimensionamento preliminar e análise de cargas.',
       image: 'https://i.imgur.com/jvb23r8.png'
     },
     {
       number: '03',
-      title: 'Hidrossanitário e elétrico',
-      description: 'Compatibilização completa das instalações NBR 5626/5410 com projetos executivos claros, detalhados e prontos para execução.',
+      title: 'Lançamento de instalações',
+      description: 'Elaboração dos projetos de instalações elétricas e hidrossanitárias com definição de pontos, prumadas e sistemas.',
       image: 'https://i.imgur.com/E3maufk.png'
     },
     {
       number: '04',
-      title: 'PPCI e aprovações',
-      description: 'Saídas de emergência, hidrantes, sinalização e aprovação completa junto ao Corpo de Bombeiros Militar de Santa Catarina.',
+      title: 'Compatibilização de disciplinas',
+      description: 'Integração completa entre arquitetura, estrutural e instalações hidrossanitárias e elétricas para evitar interferências.',
       image: 'https://i.imgur.com/QoVjmMI.png'
     },
     {
       number: '05',
-      title: 'Laudos e assessoria',
-      description: 'Inspeções técnicas, ART e suporte completo em obra até a entrega final do projeto com acompanhamento técnico especializado.',
+      title: 'Detalhamento final e entrega',
+      description: 'Refinamento de todos os detalhes executivos, documentação técnica completa e entrega dos projetos aprovados.',
       image: 'https://i.imgur.com/lWaT7vf.png'
     }
   ];
