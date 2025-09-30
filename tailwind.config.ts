@@ -98,11 +98,11 @@ export default {
         "location-pulse": {
           "0%, 100%": { 
             transform: "scale(1)",
-            filter: "drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3))"
+            filter: "drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3))"
           },
           "50%": { 
             transform: "scale(1.1)",
-            filter: "drop-shadow(0 4px 8px rgba(59, 130, 246, 0.5))"
+            filter: "drop-shadow(0 4px 8px rgba(255, 255, 255, 0.5))"
           }
         }
       },
