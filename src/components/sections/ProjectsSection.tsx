@@ -3,47 +3,40 @@ import SectionCTA from '@/components/ui/SectionCTA';
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, CheckCircle } from 'lucide-react';
 
-import project1 from '@/assets/projects/project-1.jpeg';
-import project2 from '@/assets/projects/project-2.jpeg';
-import project3 from '@/assets/projects/project-3.jpeg';
-import project4 from '@/assets/projects/project-4.jpeg';
-import project5 from '@/assets/projects/project-5.jpeg';
-import project6 from '@/assets/projects/project-6.jpeg';
-
 const projects = [
   {
     id: 1,
-    image: project1,
+    image: 'https://i.imgur.com/ffMUVEC.jpeg',
     location: 'Condomínio Haras Rio do Ouro, Balneário Camboriú/SC',
     services: ['Estrutural', 'Hidrossanitário', 'Elétrico']
   },
   {
     id: 2,
-    image: project2,
+    image: 'https://i.imgur.com/v8qcSvW.jpeg',
     location: 'Condomínio Green Ocean, Balneário Camboriú/SC',
     services: ['Estrutural', 'Hidrossanitário', 'Elétrico']
   },
   {
     id: 3,
-    image: project3,
+    image: 'https://i.imgur.com/OUdBSus.jpeg',
     location: 'Condomínio Green Ocean, Balneário Camboriú/SC',
     services: ['Estrutural', 'Hidrossanitário', 'Elétrico']
   },
   {
     id: 4,
-    image: project4,
+    image: 'https://i.imgur.com/xljyttZ.jpeg',
     location: 'Brusque/SC',
     services: ['Estrutural', 'Hidrossanitário', 'Elétrico']
   },
   {
     id: 5,
-    image: project5,
+    image: 'https://i.imgur.com/fhU3Bvk.jpeg',
     location: 'Balneário Camboriú/SC',
     services: ['Preventivo contra incêndio', 'Elétrico', 'Assessoria de aprovações']
   },
   {
     id: 6,
-    image: project6,
+    image: 'https://i.imgur.com/35smNSW.jpeg',
     location: 'Itajaí/SC',
     services: ['Estrutural']
   }
