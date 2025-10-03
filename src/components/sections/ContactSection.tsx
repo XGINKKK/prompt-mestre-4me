@@ -1,5 +1,6 @@
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import SectionCTA from '@/components/ui/SectionCTA';
+import ContactForm from '@/components/forms/ContactForm';
 
 const ContactSection = () => {
   const contactInfo = [
@@ -65,18 +66,9 @@ const ContactSection = () => {
             </div>
           </ScrollReveal>
 
-          {/* Map or Additional Content */}
+          {/* Contact Form */}
           <ScrollReveal delay={0.2}>
-            <div className="engineering-card p-8 h-full flex items-center justify-center">
-              <div className="text-center">
-                <h3 className="text-2xl font-semibold text-white mb-4">Localização</h3>
-                <p className="text-white leading-relaxed">
-                  Atendemos toda a região de Santa Catarina, incluindo Grande Florianópolis, 
-                  Itajaí, Blumenau e Joinville. Nossa localização estratégica em Balneário 
-                  Camboriú nos permite oferecer suporte rápido e eficiente.
-                </p>
-              </div>
-            </div>
+            <ContactForm />
           </ScrollReveal>
         </div>
       </div>
