@@ -29,7 +29,16 @@ const contactFormSchema = z.object({
   email: z.string().email({ message: 'E-mail inválido' }).max(255),
   phone: z.string().regex(phoneRegex, { message: 'Telefone inválido. Use o formato (00) 00000-0000' }),
   projectType: z.string().min(1, { message: 'Selecione um tipo de projeto' }),
+  otherProjectType: z.string().optional(),
   message: z.string().min(20, { message: 'A mensagem deve ter no mínimo 20 caracteres' }).max(1000),
+}).refine((data) => {
+  if (data.projectType === 'outros' && !data.otherProjectType) {
+    return false;
+  }
+  return true;
+}, {
+  message: 'Por favor, especifique o tipo de projeto',
+  path: ['otherProjectType'],
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -44,9 +53,12 @@ const ContactForm = () => {
       email: '',
       phone: '',
       projectType: '',
+      otherProjectType: '',
       message: '',
     },
   });
+
+  const selectedProjectType = form.watch('projectType');
 
   const formatPhoneNumber = (value: string) => {
     const numbers = value.replace(/\D/g, '');
@@ -182,6 +194,26 @@ const ContactForm = () => {
               </FormItem>
             )}
           />
+
+          {selectedProjectType === 'outros' && (
+            <FormField
+              control={form.control}
+              name="otherProjectType"
+              render={({ field }) => (
+                <FormItem className="animate-in fade-in-50 duration-300">
+                  <FormLabel className="text-white font-semibold">Especifique o tipo de projeto *</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Descreva o tipo de projeto"
+                      className="bg-[#1a1a1a] border-gray-700 text-white placeholder:text-gray-500 focus:border-green-500 focus:ring-green-500/20"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+          )}
 
           <FormField
             control={form.control}
